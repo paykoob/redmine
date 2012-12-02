@@ -54,6 +54,13 @@ module Redmine
 
     def format_date(date)
       return nil unless date
+      begin
+        date = JalaliDate.to_jalali(date.to_date).to_date if date.year > 2000
+      rescue
+        # Ignore the exception
+        # FIXME
+      end
+
       options = {}
       options[:format] = Setting.date_format unless Setting.date_format.blank?
       options[:locale] = User.current.language unless User.current.language.blank?
