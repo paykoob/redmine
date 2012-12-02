@@ -50,6 +50,8 @@ class Version < ActiveRecord::Base
     'sharing',
     'custom_field_values'
 
+  before_save :convert_date_from_jalali
+
   # Returns true if +user+ or current user is allowed to view the version
   def visible?(user=User.current)
     user.allowed_to?(:view_issues, self.project)
@@ -281,4 +283,16 @@ class Version < ActiveRecord::Base
       errors.add :effective_date, :not_a_date
     end
   end
+
+  def convert_date_from_jalali
+    if self.effective_date and self.effective_date.year <= 2000
+      begin
+        self.effective_date = JalaliDate.date_to_gregorian(self.effective_date).to_date
+      rescue
+        # Ignore the exception
+        # FIXME
+      end
+    end
+  end
+
 end
