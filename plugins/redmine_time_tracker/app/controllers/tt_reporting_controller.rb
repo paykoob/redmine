@@ -10,6 +10,8 @@ class TtReportingController < ApplicationController
   include SortHelper
   helper :time_trackers
   include TimeTrackersHelper
+  helper :issues
+  include IssuesHelper
 
   def index
     fetch_query

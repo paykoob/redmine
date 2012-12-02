@@ -1117,16 +1117,27 @@ module ApplicationHelper
         # JQuery uses 0..6 (sunday..saturday), 7 needs to be changed to 0
         start_of_week = start_of_week.to_i % 7
 
-        tags = javascript_tag(
-                   "var datepickerOptions={dateFormat: 'yy-mm-dd', firstDay: #{start_of_week}, " +
-                     "showOn: 'button', buttonImageOnly: true, buttonImage: '" + 
-                     path_to_image('/images/calendar.png') +
-                     "', showButtonPanel: true};")
-        jquery_locale = l('jquery.locale', :default => current_language.to_s)
-        unless jquery_locale == 'en'
-          tags << javascript_include_tag("i18n/jquery.ui.datepicker-#{jquery_locale}.js") 
-        end
+#        tags = javascript_tag(
+#                   "var datepickerOptions={dateFormat: 'yy-mm-dd', firstDay: #{start_of_week}, " +
+#                     "showOn: 'button', buttonImageOnly: true, buttonImage: '" + 
+#                     path_to_image('/images/calendar.png') +
+#                     "', showButtonPanel: true};")
+#        jquery_locale = l('jquery.locale', :default => current_language.to_s)
+#        unless jquery_locale == 'en'
+#          tags << javascript_include_tag("i18n/jquery.ui.datepicker-#{jquery_locale}.js") 
+#        end
+#        tags
+
+        tags = javascript_tag()
+        tags << javascript_include_tag('calendar-jalali/jalali')
+        tags << javascript_include_tag('calendar-jalali/calendar')
+        tags << javascript_include_tag("calendar-jalali/lang/calendar-#{current_language.to_s.downcase}.js")
+#        tags << javascript_tag(start_of_week)
+        tags << javascript_include_tag('calendar-jalali/calendar-setup')
+ #       tags << stylesheet_link_tag('calendar')
         tags
+
+
       end
     end
   end
