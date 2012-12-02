@@ -68,6 +68,8 @@ class TimeEntry < ActiveRecord::Base
 
   safe_attributes 'hours', 'comments', 'issue_id', 'activity_id', 'spent_on', 'custom_field_values', 'custom_fields'
 
+  before_save :convert_date_from_jalali
+
   def initialize(attributes=nil, *args)
     super
     if new_record? && self.activity.nil?
@@ -117,4 +119,16 @@ class TimeEntry < ActiveRecord::Base
   def editable_by?(usr)
     (usr == user && usr.allowed_to?(:edit_own_time_entries, project)) || usr.allowed_to?(:edit_time_entries, project)
   end
+
+  def convert_date_from_jalali
+    if self.spent_on and self.spent_on.year <= 2000
+      begin
+        self.spent_on = JalaliDate.date_to_gregorian(self.spent_on).to_date
+      rescue
+        # Ignore the exception
+        # FIXME
+      end
+    end
+  end
+
 end
