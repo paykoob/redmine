@@ -90,6 +90,7 @@ class Issue < ActiveRecord::Base
   # Should be after_create but would be called before previous after_save callbacks
   after_save :after_create_from_copy
   after_destroy :update_parent_attributes
+  before_save      :convert_date_from_jalali
 
   # Returns a SQL conditions string used to find all issues visible by the specified user
   def self.visible_condition(user, options={})
@@ -1391,5 +1392,24 @@ class Issue < ActiveRecord::Base
                                                 and #{Issue.table_name}.project_id=#{Project.table_name}.id
                                                 and #{visible_condition(User.current, :project => project)}
                                               group by s.id, s.is_closed, j.id")
+  end
+
+  def convert_date_from_jalali
+    if self.start_date and self.start_date.year <= 2000
+      begin
+        self.start_date = JalaliDate.date_to_gregorian(self.start_date).to_date
+      rescue
+        # Ignore the exception
+        # FIXME
+      end
+    end
+    if self.due_date and self.due_date.year <= 2000
+      begin
+        self.due_date = JalaliDate.date_to_gregorian(self.due_date).to_date
+      rescue
+        # Ignore the exception
+        # FIXME
+      end
+    end
   end
 end
