@@ -51,7 +51,7 @@ module Redmine
             @month_from = 1
           end
         else
-          @month_from ||= Date.today.month
+          @month_from ||= Date.today.month - 2
           @year_from ||= Date.today.year
         end
 
