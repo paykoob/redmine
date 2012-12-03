@@ -35,7 +35,7 @@ module Redmine
         end
       end
 
-      attr_reader :year_from, :month_from, :date_from, :date_from_jalali, :date_to, :zoom, :months, :truncated, :max_rows
+      attr_reader :year_from, :year_from_jalali, :month_from, :month_from_jalali, :date_from, :date_from_jalali, :date_to, :zoom, :months, :truncated, :max_rows
       attr_accessor :query
       attr_accessor :project
       attr_accessor :view
@@ -44,6 +44,7 @@ module Redmine
         options = options.dup
         if options[:year] && options[:year].to_i >0
           @year_from = options[:year].to_i
+          
           if options[:month] && options[:month].to_i >=1 && options[:month].to_i <= 12
             @month_from = options[:month].to_i
           else
@@ -53,6 +54,15 @@ module Redmine
           @month_from ||= Date.today.month
           @year_from ||= Date.today.year
         end
+
+        if @year_from < 1900
+          @year_from = JalaliDate.to_gregorian(@year_from,@month_from).year.to_i
+          @month_from = JalaliDate.to_gregorian(@year_from,@month_from).month.to_i+1
+        end
+        temp = Date.civil(@year_from,@month_from)
+        @month_from_jalali = JalaliDate.to_jalali(temp).to_date
+        @year_from_jalali = JalaliDate.to_jalali(temp).to_date
+        
         zoom = (options[:zoom] || User.current.pref[:gantt_zoom]).to_i
         @zoom = (zoom > 0 && zoom < 5) ? zoom : 2
         months = (options[:months] || User.current.pref[:gantt_months]).to_i
@@ -64,7 +74,7 @@ module Redmine
           User.current.preference.save
         end
         @date_from = Date.civil(@year_from, @month_from, 1)
-        @date_from_jalali = JalaliDate.to_jalali(date_from.to_date).to_date if date_from.year > 2000
+        @date_from_jalali = JalaliDate.to_jalali(@date_from.to_date).to_date if @date_from.year > 2000
         @date_to = (@date_from >> @months) - 1
         @subjects = ''
         @lines = ''

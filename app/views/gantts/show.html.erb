@@ -21,8 +21,8 @@
 <p class="buttons">
 <%= text_field_tag 'months', @gantt.months, :size => 2 %>
 <%= l(:label_months_from) %>
-<%= select_month(@gantt.month_from, :prefix => "month", :discard_type => true) %>
-<%= select_year(@gantt.year_from, :prefix => "year", :discard_type => true) %>
+<%= select_month(@gantt.month_from_jalali, :prefix => "month", :discard_type => true) %>
+<%= select_year(@gantt.year_from_jalali, :prefix => "year", :discard_type => true) %>
 <%= hidden_field_tag 'zoom', @gantt.zoom %>
 
 <%= link_to_function l(:button_apply), '$("#query_form").submit()',
@@ -129,13 +129,14 @@
     style += "height: #{height}px;"
   %>
   <%= content_tag(:div, :style => style, :class => "gantt_hdr") do %>
-    <%= link_to h("#{month_f_jalali.year}-#{month_f.month}"),
+    <%= link_to h("#{month_f_jalali.year}-#{month_f_jalali.month}"),
                 @gantt.params.merge(:year => month_f.year, :month => month_f.month),
-                :title => "#{month_name(month_f.month)} #{month_f.year}" %>
+                :title => "#{month_name(month_f_jalali.month)} #{month_f_jalali.year}" %>
   <% end %>
   <%
     left = left + width + 1
     month_f = month_f >> 1
+    month_f_jalali = month_f_jalali >> 1
   %>
 <% end %>
 
