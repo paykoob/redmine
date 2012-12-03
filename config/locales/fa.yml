@@ -394,8 +394,8 @@ fa:
   permission_view_time_entries: دیدن زمان گذاشته شده
   permission_edit_time_entries: ویرایش زمان گذاشته شده
   permission_edit_own_time_entries: ویرایش زمان گذاشته شده خود
-  permission_manage_news: سرپرستی رویدادها
-  permission_comment_news: گذاشتن دیدگاه روی رویدادها
+  permission_manage_news: سرپرستی خبرها
+  permission_comment_news: گذاشتن دیدگاه روی خبرها
   permission_manage_documents: سرپرستی نوشتارها
   permission_view_documents: دیدن نوشتارها
   permission_manage_files: سرپرستی پرونده‌ها
@@ -424,7 +424,7 @@ fa:
 
   project_module_issue_tracking: پیگیری پیامدها
   project_module_time_tracking: پیگیری زمان
-  project_module_news: رویدادها
+  project_module_news: خبرها
   project_module_documents: نوشتارها
   project_module_files: پرونده‌ها
   project_module_wiki: ویکی
@@ -533,12 +533,12 @@ fa:
   label_file_added: پرونده افزوده شد
   label_report: گزارش
   label_report_plural: گزارش
-  label_news: رویداد
-  label_news_new: افزودن رویداد
-  label_news_plural: رویداد
-  label_news_latest: آخرین رویدادها
-  label_news_view_all: دیدن همه رویدادها
-  label_news_added: رویداد افزوده شد
+  label_news: خبر
+  label_news_new: افزودن خبر
+  label_news_plural: خبر
+  label_news_latest: آخرین خبرها
+  label_news_view_all: دیدن همه خبرها
+  label_news_added: خبر افزوده شد
   label_settings: پیکربندی
   label_overview: در یک نگاه
   label_version: نگارش
@@ -944,7 +944,7 @@ fa:
   text_warn_on_leaving_unsaved: این برگه دارای نوشته‌های نگهداری نشده است که اگر آن را ترک کنید، از میان می‌روند.
   label_my_queries: جستارهای سفارشی من
   text_journal_changed_no_detail: "%{label} بروز شد"
-  label_news_comment_added: دیدگاه به یک رویداد افزوده شد
+  label_news_comment_added: دیدگاه به یک خبر افزوده شد
   button_expand_all: باز کردن همه
   button_collapse_all: بستن همه
   label_additional_workflow_transitions_for_assignee: زمانی که به کاربر واگذار شده، گذارهای بیشتر پذیرفته می‌شود
