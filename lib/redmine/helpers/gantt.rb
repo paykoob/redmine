@@ -35,7 +35,7 @@ module Redmine
         end
       end
 
-      attr_reader :year_from, :month_from, :date_from, :date_to, :zoom, :months, :truncated, :max_rows
+      attr_reader :year_from, :month_from, :date_from, :date_from_jalali, :date_to, :zoom, :months, :truncated, :max_rows
       attr_accessor :query
       attr_accessor :project
       attr_accessor :view
@@ -64,6 +64,7 @@ module Redmine
           User.current.preference.save
         end
         @date_from = Date.civil(@year_from, @month_from, 1)
+        @date_from_jalali = JalaliDate.to_jalali(date_from.to_date).to_date if date_from.year > 2000
         @date_to = (@date_from >> @months) - 1
         @subjects = ''
         @lines = ''

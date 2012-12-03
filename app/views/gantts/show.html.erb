@@ -114,6 +114,9 @@
 <% ###### Months headers ###### %>
 <%
   month_f = @gantt.date_from
+  month_f_jalali = @gantt.date_from_jalali
+
+  
   left = 0
   height = (show_weeks ? header_heigth : header_heigth + g_height)
 %>
@@ -126,7 +129,7 @@
     style += "height: #{height}px;"
   %>
   <%= content_tag(:div, :style => style, :class => "gantt_hdr") do %>
-    <%= link_to h("#{month_f.year}-#{month_f.month}"),
+    <%= link_to h("#{month_f_jalali.year}-#{month_f.month}"),
                 @gantt.params.merge(:year => month_f.year, :month => month_f.month),
                 :title => "#{month_name(month_f.month)} #{month_f.year}" %>
   <% end %>
