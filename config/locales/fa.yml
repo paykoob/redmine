@@ -245,7 +245,7 @@ fa:
   field_subject: موضوع
   field_due_date: زمان سررسید
   field_assigned_to: واگذار شده به
-  field_priority: برتری
+  field_priority: اولویت
   field_fixed_version: نگارش هدف
   field_user: کاربر
   field_principal: دستور دهنده
