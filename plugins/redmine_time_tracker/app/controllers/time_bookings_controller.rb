@@ -70,7 +70,7 @@ class TimeBookingsController < ApplicationController
     time_booking.update_time(start, stop)
 
     # only set project separately if no issue is set, otherwise the project from the issue is taken
-    time_booking.update_attributes!(:project => project) if issue.nil?
+    time_booking.update_attributes!(:project => project) #if issue.nil?
     # have to set issue separately due to mass-assignment-rules
     # TODO check if there is a security problem due to mass-assignment here!
     time_booking.update_attributes!({:comments => tb[:comments], :issue => issue}, {:without_protection => true})

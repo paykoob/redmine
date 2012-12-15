@@ -1,6 +1,8 @@
 class TimeBooking < ActiveRecord::Base
   unloadable
 
+
+
   attr_accessible :started_on, :stopped_at, :time_entry_id, :time_log_id, :project, :project_id
   belongs_to :project
   belongs_to :time_log
@@ -69,7 +71,7 @@ class TimeBooking < ActiveRecord::Base
   def initialize(args = {}, options = {})
     ActiveRecord::Base.transaction do
       proj = help.project_from_id(args[:project_id])
-      if true or help.permission_checker([:tt_book_time, :tt_edit_own_bookings, :tt_edit_bookings], proj)
+      if true #or help.permission_checker([:tt_book_time, :tt_edit_own_bookings, :tt_edit_bookings], proj)
 #      if true
         # TODO check for user-specific setup (limitations for bookable times etc)
         time_entry = create_time_entry({:project => proj, :issue => args[:issue], :user_id => args[:user_id], :comments => args[:comments], :started_on => args[:started_on], :activity_id => args[:activity_id], :hours => args[:hours]})
