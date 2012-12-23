@@ -211,8 +211,6 @@ ar:
   mail_subject_wiki_content_updated: "'%{id}' تم تحديث صفحة ويكي"
   mail_body_wiki_content_updated: "The '%{id}'تم تحديث صفحة ويكي من قبل %{author}."
 
-  gui_validation_error: خطأ
-  gui_validation_error_plural: "%{count}أخطاء"
 
   field_name: الاسم
   field_description: الوصف
@@ -543,8 +541,6 @@ ar:
   label_text: نص طويل
   label_attribute: سمة
   label_attribute_plural: السمات
-  label_download: "تحميل"
-  label_download_plural: "تحميل"
   label_no_data: لا توجد بيانات للعرض
   label_change_status: تغيير الوضع
   label_history: التاريخ
@@ -650,8 +646,6 @@ ar:
   label_repository: المستودع
   label_repository_plural: المستودعات
   label_browse: تصفح
-  label_modification: "%{count} تغير"
-  label_modification_plural: "%{count}تغيرات "
   label_branch: فرع
   label_tag: ربط
   label_revision: مراجعة
@@ -1081,3 +1075,4 @@ ar:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

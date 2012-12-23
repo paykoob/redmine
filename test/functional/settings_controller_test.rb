@@ -16,18 +16,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 require File.expand_path('../../test_helper', __FILE__)
-require 'settings_controller'
-
-# Re-raise errors caught by the controller.
-class SettingsController; def rescue_action(e) raise e end; end
 
 class SettingsControllerTest < ActionController::TestCase
   fixtures :users
 
   def setup
-    @controller = SettingsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
     User.current = nil
     @request.session[:user_id] = 1 # admin
   end
@@ -79,7 +72,7 @@ class SettingsControllerTest < ActionController::TestCase
                               :notified_events => %w(issue_added issue_updated news_added),
                               :emails_footer => 'Test footer'
                               }
-    assert_redirected_to '/settings/edit'
+    assert_redirected_to '/settings'
     assert_equal 'functional@test.foo', Setting.mail_from
     assert !Setting.bcc_recipients?
     assert_equal %w(issue_added issue_updated news_added), Setting.notified_events

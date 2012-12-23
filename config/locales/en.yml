@@ -216,9 +216,6 @@ en:
   mail_subject_wiki_content_updated: "'%{id}' wiki page has been updated"
   mail_body_wiki_content_updated: "The '%{id}' wiki page has been updated by %{author}."
 
-  gui_validation_error: 1 error
-  gui_validation_error_plural: "%{count} errors"
-
   field_name: Name
   field_description: Description
   field_summary: Summary
@@ -567,8 +564,6 @@ en:
   label_text: Long text
   label_attribute: Attribute
   label_attribute_plural: Attributes
-  label_download: "%{count} Download"
-  label_download_plural: "%{count} Downloads"
   label_no_data: No data to display
   label_change_status: Change status
   label_history: History
@@ -686,8 +681,6 @@ en:
   label_repository_new: New repository
   label_repository_plural: Repositories
   label_browse: Browse
-  label_modification: "%{count} change"
-  label_modification_plural: "%{count} changes"
   label_branch: Branch
   label_tag: Tag
   label_revision: Revision
@@ -884,6 +877,7 @@ en:
   label_attribute_of_project: "Project's %{name}"
   label_attribute_of_author: "Author's %{name}"
   label_attribute_of_assigned_to: "Assignee's %{name}"
+  label_attribute_of_user: "User's %{name}"
   label_attribute_of_fixed_version: "Target version's %{name}"
   label_cross_project_descendants: With subprojects
   label_cross_project_tree: With project tree

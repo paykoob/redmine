@@ -34,6 +34,7 @@ class Redmine::Helpers::GanttHelperTest < ActionView::TestCase
   include ProjectsHelper
   include IssuesHelper
   include ERB::Util
+  include Rails.application.routes.url_helpers
 
   def setup
     setup_with_controller
@@ -49,7 +50,7 @@ class Redmine::Helpers::GanttHelperTest < ActionView::TestCase
     @project = project
     @gantt = Redmine::Helpers::Gantt.new(options)
     @gantt.project = @project
-    @gantt.query = Query.create!(:project => @project, :name => 'Gantt')
+    @gantt.query = IssueQuery.create!(:project => @project, :name => 'Gantt')
     @gantt.view = self
     @gantt.instance_variable_set('@date_from', options[:date_from] || (today - 14))
     @gantt.instance_variable_set('@date_to', options[:date_to] || (today + 14))

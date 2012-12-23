@@ -209,8 +209,6 @@ ca:
   mail_subject_wiki_content_updated: "S'ha actualitzat la pàgina wiki «%{id}»"
   mail_body_wiki_content_updated: "En %{author} ha actualitzat la pàgina wiki «%{id}»."
 
-  gui_validation_error: 1 error
-  gui_validation_error_plural: "%{count} errors"
 
   field_name: Nom
   field_description: Descripció
@@ -513,8 +511,6 @@ ca:
   label_text: Text llarg
   label_attribute: Atribut
   label_attribute_plural: Atributs
-  label_download: "%{count} baixada"
-  label_download_plural: "%{count} baixades"
   label_no_data: Sense dades a mostrar
   label_change_status: "Canvia l'estat"
   label_history: Historial
@@ -617,8 +613,6 @@ ca:
   label_repository: Dipòsit
   label_repository_plural: Dipòsits
   label_browse: Navega
-  label_modification: "%{count} canvi"
-  label_modification_plural: "%{count} canvis"
   label_branch: Branca
   label_tag: Etiqueta
   label_revision: Revisió
@@ -1083,3 +1077,4 @@ ca:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

@@ -57,25 +57,24 @@ class ProjectsController < ApplicationController
       format.api  {
         @offset, @limit = api_offset_and_limit
         @project_count = Project.visible.count
-        @projects = Project.visible.all(:offset => @offset, :limit => @limit, :order => 'lft')
+        @projects = Project.visible.offset(@offset).limit(@limit).order('lft').all
       }
       format.atom {
-        projects = Project.visible.find(:all, :order => 'created_on DESC',
-                                              :limit => Setting.feeds_limit.to_i)
+        projects = Project.visible.order('created_on DESC').limit(Setting.feeds_limit.to_i).all
         render_feed(projects, :title => "#{Setting.app_title}: #{l(:label_project_latest)}")
       }
     end
   end
 
   def new
-    @issue_custom_fields = IssueCustomField.find(:all, :order => "#{CustomField.table_name}.position")
+    @issue_custom_fields = IssueCustomField.sorted.all
     @trackers = Tracker.sorted.all
     @project = Project.new
     @project.safe_attributes = params[:project]
   end
 
   def create
-    @issue_custom_fields = IssueCustomField.find(:all, :order => "#{CustomField.table_name}.position")
+    @issue_custom_fields = IssueCustomField.sorted.all
     @trackers = Tracker.sorted.all
     @project = Project.new
     @project.safe_attributes = params[:project]
@@ -91,10 +90,12 @@ class ProjectsController < ApplicationController
       respond_to do |format|
         format.html {
           flash[:notice] = l(:notice_successful_create)
-          redirect_to(params[:continue] ?
-            {:controller => 'projects', :action => 'new', :project => {:parent_id => @project.parent_id}.reject {|k,v| v.nil?}} :
-            {:controller => 'projects', :action => 'settings', :id => @project}
-          )
+          if params[:continue]
+            attrs = {:parent_id => @project.parent_id}.reject {|k,v| v.nil?}
+            redirect_to new_project_path(attrs)
+          else
+            redirect_to settings_project_path(@project)
+          end
         }
         format.api  { render :action => 'show', :status => :created, :location => url_for(:controller => 'projects', :action => 'show', :id => @project.id) }
       end
@@ -104,15 +105,11 @@ class ProjectsController < ApplicationController
         format.api  { render_validation_errors(@project) }
       end
     end
-
   end
 
   def copy
-    @issue_custom_fields = IssueCustomField.find(:all, :order => "#{CustomField.table_name}.position")
+    @issue_custom_fields = IssueCustomField.sorted.all
     @trackers = Tracker.sorted.all
-    @root_projects = Project.find(:all,
-                                  :conditions => "parent_id IS NULL AND status = #{Project::STATUS_ACTIVE}",
-                                  :order => 'name')
     @source_project = Project.find(params[:id])
     if request.get?
       @project = Project.copy_from(@source_project)
@@ -124,13 +121,13 @@ class ProjectsController < ApplicationController
         if validate_parent_id && @project.copy(@source_project, :only => params[:only])
           @project.set_allowed_parent!(params[:project]['parent_id']) if params[:project].has_key?('parent_id')
           flash[:notice] = l(:notice_successful_create)
-          redirect_to :controller => 'projects', :action => 'settings', :id => @project
+          redirect_to settings_project_path(@project)
         elsif !@project.new_record?
           # Project was created
           # But some objects were not copied due to validation failures
           # (eg. issues from disabled trackers)
           # TODO: inform about that
-          redirect_to :controller => 'projects', :action => 'settings', :id => @project
+          redirect_to settings_project_path(@project)
         end
       end
     end
@@ -148,7 +145,7 @@ class ProjectsController < ApplicationController
 
     @users_by_role = @project.users_by_role
     @subprojects = @project.children.visible.all
-    @news = @project.news.find(:all, :limit => 5, :include => [ :author, :project ], :order => "#{News.table_name}.created_on DESC")
+    @news = @project.news.limit(5).includes(:author, :project).reorder("#{News.table_name}.created_on DESC").all
     @trackers = @project.rolled_up_trackers
 
     cond = @project.project_condition(Setting.display_subprojects_issues?)
@@ -169,7 +166,7 @@ class ProjectsController < ApplicationController
   end
 
   def settings
-    @issue_custom_fields = IssueCustomField.find(:all, :order => "#{CustomField.table_name}.position")
+    @issue_custom_fields = IssueCustomField.sorted.all
     @issue_category ||= IssueCategory.new
     @member ||= @project.members.new
     @trackers = Tracker.sorted.all
@@ -186,7 +183,7 @@ class ProjectsController < ApplicationController
       respond_to do |format|
         format.html {
           flash[:notice] = l(:notice_successful_update)
-          redirect_to :action => 'settings', :id => @project
+          redirect_to settings_project_path(@project)
         }
         format.api  { render_api_ok }
       end
@@ -204,7 +201,7 @@ class ProjectsController < ApplicationController
   def modules
     @project.enabled_module_names = params[:enabled_module_names]
     flash[:notice] = l(:notice_successful_update)
-    redirect_to :action => 'settings', :id => @project, :tab => 'modules'
+    redirect_to settings_project_path(@project, :tab => 'modules')
   end
 
   def archive
@@ -213,12 +210,12 @@ class ProjectsController < ApplicationController
         flash[:error] = l(:error_can_not_archive_project)
       end
     end
-    redirect_to(url_for(:controller => 'admin', :action => 'projects', :status => params[:status]))
+    redirect_to admin_projects_path(:status => params[:status])
   end
 
   def unarchive
     @project.unarchive if request.post? && !@project.active?
-    redirect_to(url_for(:controller => 'admin', :action => 'projects', :status => params[:status]))
+    redirect_to admin_projects_path(:status => params[:status])
   end
 
   def close
@@ -237,7 +234,7 @@ class ProjectsController < ApplicationController
     if api_request? || params[:confirm]
       @project_to_destroy.destroy
       respond_to do |format|
-        format.html { redirect_to :controller => 'admin', :action => 'projects' }
+        format.html { redirect_to admin_projects_path }
         format.api  { render_api_ok }
       end
     end

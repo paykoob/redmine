@@ -176,8 +176,6 @@ it:
   mail_subject_register: "Attivazione utente %{value}"
   mail_body_register: "Per attivare l'utente, usa il seguente collegamento:"
 
-  gui_validation_error: 1 errore
-  gui_validation_error_plural: "%{count} errori"
 
   field_name: Nome
   field_description: Descrizione
@@ -356,8 +354,6 @@ it:
   label_text: Testo esteso
   label_attribute: Attributo
   label_attribute_plural: Attributi
-  label_download: "%{count} Download"
-  label_download_plural: "%{count} Download"
   label_no_data: Nessun dato disponibile
   label_change_status: Cambia stato
   label_history: Cronologia
@@ -445,8 +441,6 @@ it:
   label_day_plural: giorni
   label_repository: Repository
   label_browse: Sfoglia
-  label_modification: "%{count} modifica"
-  label_modification_plural: "%{count} modifiche"
   label_revision: Versione
   label_revision_plural: Versioni
   label_added: aggiunto
@@ -1082,3 +1076,4 @@ it:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

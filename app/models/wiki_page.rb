@@ -40,7 +40,7 @@ class WikiPage < ActiveRecord::Base
   attr_accessor :redirect_existing_links
 
   validates_presence_of :title
-  validates_format_of :title, :with => /^[^,\.\/\?\;\|\s]*$/
+  validates_format_of :title, :with => /\A[^,\.\/\?\;\|\s]*\z/
   validates_uniqueness_of :title, :scope => :wiki_id, :case_sensitive => false
   validates_associated :content
 
@@ -49,9 +49,9 @@ class WikiPage < ActiveRecord::Base
   before_save    :handle_redirects
 
   # eager load information about last updates, without loading text
-  scope :with_updated_on, {
-    :select => "#{WikiPage.table_name}.*, #{WikiContent.table_name}.updated_on, #{WikiContent.table_name}.version",
-    :joins => "LEFT JOIN #{WikiContent.table_name} ON #{WikiContent.table_name}.page_id = #{WikiPage.table_name}.id"
+  scope :with_updated_on, lambda {
+    select("#{WikiPage.table_name}.*, #{WikiContent.table_name}.updated_on, #{WikiContent.table_name}.version").
+      joins("LEFT JOIN #{WikiContent.table_name} ON #{WikiContent.table_name}.page_id = #{WikiPage.table_name}.id")
   }
 
   # Wiki pages that are protected by default

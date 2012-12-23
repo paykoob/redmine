@@ -149,6 +149,8 @@ tr.issue td.subject, tr.issue td.category, td.assigned_to, tr.issue td.string, t
 tr.issue td.subject, tr.issue td.relations { text-align: left; }
 tr.issue td.done_ratio table.progress { margin-left:auto; margin-right: auto;}
 tr.issue td.relations span {white-space: nowrap;}
+table.issues td.description {color:#777; font-size:90%; padding:4px 4px 4px 24px; text-align:left; white-space:normal;}
+table.issues td.description pre {white-space:normal;}
 
 tr.issue.idnt td.subject a {background: url(../images/bullet_arrow_right.png) no-repeat 0 50%; padding-left: 16px;}
 tr.issue.idnt-1 td.subject {padding-left: 0.5em;}
@@ -209,7 +211,7 @@ table.permissions td.role {color:#999;font-size:90%;font-weight:normal !importan
 tr.wiki-page-version td.updated_on, tr.wiki-page-version td.author {text-align:center;}
 
 tr.time-entry { text-align: center; white-space: nowrap; }
-tr.time-entry td.subject, tr.time-entry td.comments { text-align: left; white-space: normal; }
+tr.time-entry td.issue, tr.time-entry td.comments { text-align: left; white-space: normal; }
 td.hours { text-align: right; font-weight: bold; padding-right: 0.5em; }
 td.hours .hours-dec { font-size: 0.9em; }
 
@@ -370,6 +372,8 @@ div#activity dt .time { color: #777; font-size: 80%; }
 div#activity dd .description, #search-results dd .description { font-style: italic; }
 div#activity span.project:after, #search-results span.project:after { content: " -"; }
 div#activity dd span.description, #search-results dd span.description { display:block; color: #808080; }
+div#activity dt.grouped {margin-left:5em;}
+div#activity dd.grouped {margin-left:9em;}
 
 #search-results dd { margin-bottom: 1em; padding-left: 20px; margin-left:0px; }
 
@@ -452,8 +456,7 @@ table.fields_permissions td.required {background:#d88;}
 textarea#custom_field_possible_values {width: 99%}
 input#content_comments {width: 99%}
 
-.pagination {font-size: 90%}
-p.pagination {margin-top:8px;}
+p.pagination {margin-top:8px; font-size: 90%}
 
 /***** Tabular forms ******/
 .tabular p{
@@ -523,9 +526,16 @@ fieldset#notified_events .parent { padding-left: 20px; }
 span.required {color: #bb0000;}
 .summary {font-style: italic;}
 
-#attachments_fields input.description {margin-left: 8px; width:340px;}
+#attachments_fields input.description {margin-left:4px; width:340px;}
 #attachments_fields span {display:block; white-space:nowrap;}
-#attachments_fields img {vertical-align: middle;}
+#attachments_fields input.filename {border:0; height:1.8em; width:250px; color:#555; background-color:inherit; background:url(../images/attachment.png) no-repeat 1px 50%; padding-left:18px;}
+#attachments_fields .ajax-waiting input.filename {background:url(../images/hourglass.png) no-repeat 0px 50%;}
+#attachments_fields .ajax-loading input.filename {background:url(../images/loading.gif) no-repeat 0px 50%;}
+#attachments_fields div.ui-progressbar { width: 100px; height:14px; margin: 2px 0 -5px 8px; display: inline-block; }
+a.remove-upload {background: url(../images/delete.png) no-repeat 1px 50%; width:1px; display:inline-block; padding-left:16px;}
+a.remove-upload:hover {text-decoration:none !important;}
+
+div.fileover { background-color: lavender; }
 
 div.attachments { margin-top: 12px; }
 div.attachments p { margin:4px 0 2px 0; }
@@ -1098,13 +1108,13 @@ h2 img { vertical-align:middle; }
 .syntaxhl .type { color:#339; font-weight:bold }
 .syntaxhl .value { color: #088; }
 .syntaxhl .variable  { color:#037 }
- 
+
 .syntaxhl .insert { background: hsla(120,100%,50%,0.12) }
 .syntaxhl .delete { background: hsla(0,100%,50%,0.12) }
 .syntaxhl .change { color: #bbf; background: #007; }
 .syntaxhl .head { color: #f8f; background: #505 }
 .syntaxhl .head .filename { color: white; }
- 
+
 .syntaxhl .delete .eyecatcher { background-color: hsla(0,100%,50%,0.2); border: 1px solid hsla(0,100%,45%,0.5); margin: -1px; border-bottom: none; border-top-left-radius: 5px; border-top-right-radius: 5px; }
 .syntaxhl .insert .eyecatcher { background-color: hsla(120,100%,50%,0.2); border: 1px solid hsla(120,100%,25%,0.5); margin: -1px; border-top: none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; }
 

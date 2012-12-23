@@ -184,8 +184,6 @@ sl:
   mail_subject_reminder: "%{count} zahtevek(zahtevki) zapadejo v naslednjih %{days} dneh"
   mail_body_reminder: "%{count} zahtevek(zahtevki), ki so vam dodeljeni bodo zapadli v naslednjih %{days} dneh:"
 
-  gui_validation_error: 1 napaka
-  gui_validation_error_plural: "%{count} napak"
 
   field_name: Ime
   field_description: Opis
@@ -452,8 +450,6 @@ sl:
   label_text: Dolgo besedilo
   label_attribute: Lastnost
   label_attribute_plural: Lastnosti
-  label_download: "%{count} Prenos"
-  label_download_plural: "%{count} Prenosi"
   label_no_data: Ni podatkov za prikaz
   label_change_status: Spremeni stanje
   label_history: Zgodovina
@@ -553,8 +549,6 @@ sl:
   label_repository: Shramba
   label_repository_plural: Shrambe
   label_browse: Prebrskaj
-  label_modification: "%{count} sprememba"
-  label_modification_plural: "%{count} spremembe"
   label_revision: Revizija
   label_revision_plural: Revizije
   label_associated_revisions: Povezane revizije
@@ -1081,3 +1075,4 @@ sl:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

@@ -256,8 +256,6 @@ sv:
   mail_subject_wiki_content_updated: "'%{id}' wikisida har uppdaterats"
   mail_body_wiki_content_updated: "The '%{id}' wikisida har uppdaterats av %{author}."
 
-  gui_validation_error: 1 fel
-  gui_validation_error_plural: "%{count} fel"
 
   field_name: Namn
   field_description: Beskrivning
@@ -594,8 +592,6 @@ sv:
   label_text: Lång text
   label_attribute: Attribut
   label_attribute_plural: Attribut
-  label_download: "%{count} Nerladdning"
-  label_download_plural: "%{count} Nerladdningar"
   label_no_data: Ingen data att visa
   label_change_status: Ändra status
   label_history: Historia
@@ -706,8 +702,6 @@ sv:
   label_repository_new: Nytt versionsarkiv
   label_repository_plural: Versionsarkiv
   label_browse: Bläddra
-  label_modification: "%{count} ändring"
-  label_modification_plural: "%{count} ändringar"
   label_branch: Branch
   label_tag: Tag
   label_revision: Revision
@@ -1119,3 +1113,4 @@ sv:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

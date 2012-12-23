@@ -202,8 +202,6 @@ eu:
   mail_subject_wiki_content_updated: "'%{id}' wiki orria eguneratu da"
   mail_body_wiki_content_updated: "%{author}-(e)k '%{id}' wiki orria eguneratu du."
 
-  gui_validation_error: akats 1
-  gui_validation_error_plural: "%{count} akats"
 
   field_name: Izena
   field_description: Deskribapena
@@ -496,8 +494,6 @@ eu:
   label_text: Testu luzea
   label_attribute: Atributua
   label_attribute_plural: Atributuak
-  label_download: "Deskarga %{count}"
-  label_download_plural: "%{count} Deskarga"
   label_no_data: Ez dago erakusteko daturik
   label_change_status: Egoera aldatu
   label_history: Historikoa
@@ -600,8 +596,6 @@ eu:
   label_repository: Biltegia
   label_repository_plural: Biltegiak
   label_browse: Arakatu
-  label_modification: "aldaketa %{count}"
-  label_modification_plural: "%{count} aldaketa"
   label_branch: Adarra
   label_tag: Etiketa
   label_revision: Berrikuspena
@@ -1082,3 +1076,4 @@ eu:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

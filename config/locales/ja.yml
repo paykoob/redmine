@@ -238,8 +238,6 @@ ja:
   mail_subject_wiki_content_updated: "Wikiページ %{id} が更新されました"
   mail_body_wiki_content_updated: "%{author} によってWikiページ %{id} が更新されました。"
 
-  gui_validation_error: 1件のエラー
-  gui_validation_error_plural: "%{count}件のエラー"
 
   field_name: 名称
   field_description: 説明
@@ -450,7 +448,7 @@ ja:
   permission_manage_repository: リポジトリの管理
   permission_browse_repository: リポジトリの閲覧
   permission_view_changesets: 更新履歴の閲覧
-  permission_commit_access: コミットの閲覧
+  permission_commit_access: コミット権限
   permission_manage_boards: フォーラムの管理
   permission_view_messages: メッセージの閲覧
   permission_add_messages: メッセージの追加
@@ -560,8 +558,6 @@ ja:
   label_text: 長いテキスト
   label_attribute: 属性
   label_attribute_plural: 属性
-  label_download: "%{count}ダウンロード"
-  label_download_plural: "%{count}ダウンロード"
   label_no_data: 表示するデータがありません
   label_change_status: ステータスの変更
   label_history: 履歴
@@ -666,8 +662,6 @@ ja:
   label_repository: リポジトリ
   label_repository_plural: リポジトリ
   label_browse: ブラウズ
-  label_modification: "%{count}点の変更"
-  label_modification_plural: "%{count}点の変更"
   label_branch: ブランチ
   label_tag: タグ
   label_revision: リビジョン
@@ -862,7 +856,7 @@ ja:
   button_unlock: アンロック
   button_download: ダウンロード
   button_list: 一覧
-  button_view: 見る
+  button_view: 表示
   button_move: 移動
   button_move_and_follow: 移動後表示
   button_back: 戻る
@@ -1099,7 +1093,7 @@ ja:
   field_private_notes: プライベート注記
   permission_view_private_notes: プライベート注記の閲覧
   permission_set_notes_private: 注記をプライベートに設定
-  label_no_issues_in_project: no issues in project
+  label_no_issues_in_project: 次のプロジェクト内のチケットを除く
   label_any: すべて
   label_last_n_weeks: 直近%{count}週間
   setting_cross_project_subtasks: 異なるプロジェクトのチケット間の親子関係を許可
@@ -1111,3 +1105,4 @@ ja:
   setting_non_working_week_days: 休業日
   label_in_the_next_days: 今後○日
   label_in_the_past_days: 過去○日
+  label_attribute_of_user: ユーザーの %{name}

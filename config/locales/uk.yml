@@ -174,8 +174,6 @@ uk:
   mail_subject_account_activation_request: "Запит на активацію облікового запису %{value}"
   mail_body_account_activation_request: "Новий користувач (%{value}) зареєструвався. Його обліковий запис чекає на ваше підтвердження:"
 
-  gui_validation_error: 1 помилка
-  gui_validation_error_plural: "%{count} помилки(ок)"
 
   field_name: Ім'я
   field_description: Опис
@@ -363,8 +361,6 @@ uk:
   label_text: Довгий текст
   label_attribute: Атрибут
   label_attribute_plural: атрибути
-  label_download: "%{count} Завантажено"
-  label_download_plural: "%{count} Завантажень"
   label_no_data: Немає даних для відображення
   label_change_status: Змінити статус
   label_history: Історія
@@ -453,8 +449,6 @@ uk:
   label_day_plural: днів(я)
   label_repository: Репозиторій
   label_browse: Проглянути
-  label_modification: "%{count} зміна"
-  label_modification_plural: "%{count} змін"
   label_revision: Версія
   label_revision_plural: Версій
   label_added: додано
@@ -1076,3 +1070,4 @@ uk:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

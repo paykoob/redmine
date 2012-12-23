@@ -197,8 +197,6 @@ da:
   mail_subject_account_activation_request: "%{value} kontoaktivering"
   mail_body_account_activation_request: "En ny bruger (%{value}) er registreret. Godkend venligst kontoen:"
 
-  gui_validation_error: 1 fejl
-  gui_validation_error_plural: "%{count} fejl"
 
   field_name: Navn
   field_description: Beskrivelse
@@ -400,8 +398,6 @@ da:
   label_text: Lang tekst
   label_attribute: Attribut
   label_attribute_plural: Attributter
-  label_download: "%{count} Download"
-  label_download_plural: "%{count} Downloads"
   label_no_data: Ingen data at vise
   label_change_status: Ændringsstatus
   label_history: Historik
@@ -501,8 +497,6 @@ da:
   label_repository: Repository
   label_repository_plural: Repositories
   label_browse: Gennemse
-  label_modification: "%{count} ændring"
-  label_modification_plural: "%{count} ændringer"
   label_revision: Revision
   label_revision_plural: Revisioner
   label_associated_revisions: Tilknyttede revisioner
@@ -1098,3 +1092,4 @@ da:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

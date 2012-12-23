@@ -18,10 +18,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 require File.expand_path('../../test_helper', __FILE__)
-require 'attachments_controller'
-
-# Re-raise errors caught by the controller.
-class AttachmentsController; def rescue_action(e) raise e end; end
 
 class AttachmentsControllerTest < ActionController::TestCase
   fixtures :users, :projects, :roles, :members, :member_roles,
@@ -29,9 +25,6 @@ class AttachmentsControllerTest < ActionController::TestCase
            :versions, :wiki_pages, :wikis, :documents
 
   def setup
-    @controller = AttachmentsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
     User.current = nil
     set_fixtures_attachments_directory
   end
@@ -230,11 +223,20 @@ class AttachmentsControllerTest < ActionController::TestCase
     set_tmp_attachments_directory
   end
 
-  def test_show_file_without_container_should_be_denied
+  def test_show_file_without_container_should_be_allowed_to_author
     set_tmp_attachments_directory
     attachment = Attachment.create!(:file => uploaded_test_file("testfile.txt", "text/plain"), :author_id => 2)
 
     @request.session[:user_id] = 2
+    get :show, :id => attachment.id
+    assert_response 200
+  end
+
+  def test_show_file_without_container_should_be_denied_to_other_users
+    set_tmp_attachments_directory
+    attachment = Attachment.create!(:file => uploaded_test_file("testfile.txt", "text/plain"), :author_id => 2)
+
+    @request.session[:user_id] = 3
     get :show, :id => attachment.id
     assert_response 403
   end

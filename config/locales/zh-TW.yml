@@ -298,8 +298,6 @@
   mail_subject_wiki_content_updated: "'%{id}' wiki 頁面已被更新"
   mail_body_wiki_content_updated: "此 '%{id}' wiki 頁面已被 %{author} 更新。"
 
-  gui_validation_error: 1 個錯誤
-  gui_validation_error_plural: "%{count} 個錯誤"
 
   field_name: 名稱
   field_description: 概述
@@ -649,8 +647,6 @@
   label_text: 長文字
   label_attribute: 屬性
   label_attribute_plural: 屬性
-  label_download: "%{count} 個下載"
-  label_download_plural: "%{count} 個下載"
   label_no_data: 沒有任何資料可供顯示
   label_change_status: 變更狀態
   label_history: 歷史
@@ -768,8 +764,6 @@
   label_repository_new: 建立新儲存機制
   label_repository_plural: 儲存機制清單
   label_browse: 瀏覽
-  label_modification: "%{count} 變更"
-  label_modification_plural: "%{count} 變更"
   label_branch: 分支
   label_tag: 標籤
   label_revision: 修訂版
@@ -1162,3 +1156,4 @@
   description_date_from: 輸入起始日期
   description_date_to: 輸入結束日期
   text_repository_identifier_info: '僅允許使用小寫英文字母 (a-z), 阿拉伯數字, 虛線與底線。<br />一旦儲存之後, 代碼便無法再次被更改。'
+  label_attribute_of_user: User's %{name}

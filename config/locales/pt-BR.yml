@@ -206,8 +206,6 @@ pt-BR:
   mail_subject_reminder: "%{count} tarefa(s) com data prevista para os próximos %{days} dias"
   mail_body_reminder: "%{count} tarefa(s) para você com data prevista para os próximos %{days} dias:"
 
-  gui_validation_error: 1 erro
-  gui_validation_error_plural: "%{count} erros"
 
   field_name: Nome
   field_description: Descrição
@@ -424,8 +422,6 @@ pt-BR:
   label_text: Texto longo
   label_attribute: Atributo
   label_attribute_plural: Atributos
-  label_download: "%{count} Download"
-  label_download_plural: "%{count} Downloads"
   label_no_data: Nenhuma informação disponível
   label_change_status: Alterar situação
   label_history: Histórico
@@ -525,8 +521,6 @@ pt-BR:
   label_repository: Repositório
   label_repository_plural: Repositórios
   label_browse: Procurar
-  label_modification: "%{count} alteração"
-  label_modification_plural: "%{count} alterações"
   label_revision: Revisão
   label_revision_plural: Revisões
   label_associated_revisions: Revisões associadas
@@ -1102,3 +1096,4 @@ pt-BR:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

@@ -198,8 +198,6 @@ bs:
   mail_subject_reminder: "%{count} aktivnost(i) u kašnjenju u narednim %{days} danima"
   mail_body_reminder: "%{count} aktivnost(i) koje su dodjeljenje vama u narednim %{days} danima:"
 
-  gui_validation_error: 1 greška
-  gui_validation_error_plural: "%{count} grešaka"
 
   field_name: Ime
   field_description: Opis
@@ -476,8 +474,6 @@ bs:
   label_text: Dugi tekst
   label_attribute: Atribut
   label_attribute_plural: Atributi
-  label_download: "%{count} download"
-  label_download_plural: "%{count} download-i"
   label_no_data: Nema podataka za prikaz
   label_change_status: Promjeni status
   label_history: Istorija
@@ -577,8 +573,6 @@ bs:
   label_repository: Repozitorij
   label_repository_plural: Repozitoriji
   label_browse: Listaj
-  label_modification: "%{count} promjena"
-  label_modification_plural: "%{count} promjene"
   label_revision: Revizija
   label_revision_plural: Revizije
   label_associated_revisions: Doddjeljene revizije
@@ -1094,3 +1088,4 @@ bs:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

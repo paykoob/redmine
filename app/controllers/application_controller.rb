@@ -22,6 +22,7 @@ class Unauthorized < Exception; end
 
 class ApplicationController < ActionController::Base
   include Redmine::I18n
+  include Redmine::Pagination
 
   class_attribute :accept_api_auth_actions
   class_attribute :accept_rss_auth_actions
@@ -293,11 +294,21 @@ class ApplicationController < ActionController::Base
   def find_issues
     @issues = Issue.find_all_by_id(params[:id] || params[:ids])
     raise ActiveRecord::RecordNotFound if @issues.empty?
-    raise Unauthorized if @issues.all?(&:visible?)
+    raise Unauthorized unless @issues.all?(&:visible?)
     @projects = @issues.collect(&:project).compact.uniq
     @project = @projects.first if @projects.size == 1
   rescue ActiveRecord::RecordNotFound
     render_404
+  end
+
+  def find_attachments
+    if (attachments = params[:attachments]).present?
+      att = attachments.values.collect do |attachment|
+        Attachment.find_by_token( attachment[:token] ) if attachment[:token].present?
+      end
+      att.compact!
+    end
+    @attachments = att || []
   end
 
   # make sure that the user is a member of the project (or admin) if project is private
@@ -322,6 +333,16 @@ class ApplicationController < ActionController::Base
       url = CGI.unescape(referer.to_s)
     end
     url
+  end
+
+  # Returns the path to project issues or to the cross-project
+  # issue list if project is nil
+  def _issues_path(project, *args)
+    if project
+      project_issues_path(project, *args)
+    else
+      issues_path(*args)
+    end
   end
 
   def redirect_back_or_default(default)

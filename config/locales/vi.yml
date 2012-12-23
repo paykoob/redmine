@@ -237,8 +237,6 @@ vi:
   mail_subject_reminder: "%{count} vấn đề hết hạn trong các %{days} ngày tới"
   mail_body_reminder: "%{count} vấn đề gán cho bạn sẽ hết hạn trong %{days} ngày tới:"
 
-  gui_validation_error: 1 lỗi
-  gui_validation_error_plural: "%{count} lỗi"
 
   field_name: Tên
   field_description: Mô tả
@@ -452,8 +450,6 @@ vi:
   label_text: Long text
   label_attribute: Attribute
   label_attribute_plural: Attributes
-  label_download: "%{count} lần tải"
-  label_download_plural: "%{count} lần tải"
   label_no_data: Chưa có thông tin gì
   label_change_status: Đổi trạng thái
   label_history: Lược sử
@@ -553,8 +549,6 @@ vi:
   label_repository: Kho lưu trữ
   label_repository_plural: Kho lưu trữ
   label_browse: Duyệt
-  label_modification: "%{count} thay đổi"
-  label_modification_plural: "%{count} thay đổi"
   label_revision: Bản điều chỉnh
   label_revision_plural: Bản điều chỉnh
   label_associated_revisions: Associated revisions
@@ -1132,3 +1126,4 @@ vi:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

@@ -24,6 +24,7 @@ module ApplicationHelper
   include Redmine::WikiFormatting::Macros::Definitions
   include Redmine::I18n
   include GravatarHelper::PublicMethods
+  include Redmine::Pagination::Helper
 
   extend Forwardable
   def_delegators :wiki_helper, :wikitoolbar_for, :heads_for_wiki_formatter
@@ -391,59 +392,6 @@ module ApplicationHelper
     str.blank? ? nil : str
   end
 
-  def pagination_links_full(paginator, count=nil, options={})
-    page_param = options.delete(:page_param) || :page
-    per_page_links = options.delete(:per_page_links)
-    url_param = params.dup
-
-    html = ''
-    if paginator.current.previous
-      # \xc2\xab(utf-8) = &#171;
-      html << link_to_content_update(
-                   "\xc2\xab " + l(:label_previous),
-                   url_param.merge(page_param => paginator.current.previous)) + ' '
-    end
-
-    html << (pagination_links_each(paginator, options) do |n|
-      link_to_content_update(n.to_s, url_param.merge(page_param => n))
-    end || '')
-
-    if paginator.current.next
-      # \xc2\xbb(utf-8) = &#187;
-      html << ' ' + link_to_content_update(
-                      (l(:label_next) + " \xc2\xbb"),
-                      url_param.merge(page_param => paginator.current.next))
-    end
-
-    unless count.nil?
-      html << " (#{paginator.current.first_item}-#{paginator.current.last_item}/#{count})"
-      if per_page_links != false && links = per_page_links(paginator.items_per_page, count)
-	      html << " | #{links}"
-      end
-    end
-
-    html.html_safe
-  end
-
-  def per_page_links(selected=nil, item_count=nil)
-    values = Setting.per_page_options_array
-    if item_count && values.any?
-      if item_count > values.first
-        max = values.detect {|value| value >= item_count} || item_count
-      else
-        max = item_count
-      end
-      values = values.select {|value| value <= max || value == selected}
-    end
-    if values.empty? || (values.size == 1 && values.first == selected)
-      return nil
-    end
-    links = values.collect do |n|
-      n == selected ? n : link_to_content_update(n, params.merge(:per_page => n))
-    end
-    l(:label_display_per_page, links.join(', '))
-  end
-
   def reorder_links(name, url, method = :post)
     link_to(image_tag('2uparrow.png', :alt => l(:label_sort_highest)),
             url.merge({"#{name}[move_to]" => 'highest'}),
@@ -597,8 +545,9 @@ module ApplicationHelper
 
   def parse_inline_attachments(text, project, obj, attr, only_path, options)
     # when using an image link, try to use an attachment, if possible
-    if options[:attachments] || (obj && obj.respond_to?(:attachments))
-      attachments = options[:attachments] || obj.attachments
+    if options[:attachments].present? || (obj && obj.respond_to?(:attachments))
+      attachments = options[:attachments] || []
+      attachments += obj.attachments if obj
       text.gsub!(/src="([^\/"]+\.(bmp|gif|jpg|jpe|jpeg|png))"(\s+alt="([^"]*)")?/i) do |m|
         filename, ext, alt, alttext = $1.downcase, $2, $3, $4
         # search for the picture in attachments
@@ -799,14 +748,14 @@ module ApplicationHelper
                 repository = project.repository
               end
               if prefix == 'commit'
-                if repository && (changeset = Changeset.visible.find(:first, :conditions => ["repository_id = ? AND scmid LIKE ?", repository.id, "#{name}%"]))
+                if repository && (changeset = Changeset.visible.where("repository_id = ? AND scmid LIKE ?", repository.id, "#{name}%").first)
                   link = link_to h("#{project_prefix}#{repo_prefix}#{name}"), {:only_path => only_path, :controller => 'repositories', :action => 'revision', :id => project, :repository_id => repository.identifier_param, :rev => changeset.identifier},
                                                :class => 'changeset',
                                                :title => truncate_single_line(h(changeset.comments), :length => 100)
                 end
               else
                 if repository && User.current.allowed_to?(:browse_repository, project)
-                  name =~ %r{^[/\\]*(.*?)(@([0-9a-f]+))?(#(L\d+))?$}
+                  name =~ %r{^[/\\]*(.*?)(@([^/\\@]+?))?(#(L\d+))?$}
                   path, rev, anchor = $1, $3, $5
                   link = link_to h("#{project_prefix}#{prefix}:#{repo_prefix}#{name}"), {:controller => 'repositories', :action => (prefix == 'export' ? 'raw' : 'entry'), :id => project, :repository_id => repository.identifier_param,
                                                           :path => to_path_param(path),
@@ -824,7 +773,7 @@ module ApplicationHelper
                                                      :class => 'attachment'
             end
           when 'project'
-            if p = Project.visible.find(:first, :conditions => ["identifier = :s OR LOWER(name) = :s", {:s => name.downcase}])
+            if p = Project.visible.where("identifier = :s OR LOWER(name) = :s", :s => name.downcase).first
               link = link_to_project(p, {:only_path => only_path}, :class => 'project')
             end
           end

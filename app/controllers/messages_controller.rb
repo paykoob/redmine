@@ -19,6 +19,7 @@ class MessagesController < ApplicationController
   menu_item :boards
   default_search_scope :messages
   before_filter :find_board, :only => [:new, :preview]
+  before_filter :find_attachments, :only => [:preview]
   before_filter :find_message, :except => [:new, :preview]
   before_filter :authorize, :except => [:preview, :edit, :destroy]
 
@@ -40,10 +41,12 @@ class MessagesController < ApplicationController
 
     @reply_count = @topic.children.count
     @reply_pages = Paginator.new self, @reply_count, REPLIES_PER_PAGE, page
-    @replies =  @topic.children.find(:all, :include => [:author, :attachments, {:board => :project}],
-                                           :order => "#{Message.table_name}.created_on ASC",
-                                           :limit => @reply_pages.items_per_page,
-                                           :offset => @reply_pages.current.offset)
+    @replies =  @topic.children.
+      includes(:author, :attachments, {:board => :project}).
+      reorder("#{Message.table_name}.created_on ASC").
+      limit(@reply_pages.items_per_page).
+      offset(@reply_pages.current.offset).
+      all
 
     @reply = Message.new(:subject => "RE: #{@message.subject}")
     render :action => "show", :layout => false if request.xhr?
@@ -115,7 +118,6 @@ class MessagesController < ApplicationController
 
   def preview
     message = @board.messages.find_by_id(params[:id])
-    @attachements = message.attachments if message
     @text = (params[:message] || params[:reply])[:content]
     @previewed = message
     render :partial => 'common/preview'

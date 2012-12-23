@@ -222,8 +222,6 @@ de:
   mail_subject_wiki_content_updated: "Wiki-Seite '%{id}' erfolgreich aktualisiert"
   mail_body_wiki_content_updated: "Die Wiki-Seite '%{id}' wurde von %{author} aktualisiert."
 
-  gui_validation_error: 1 Fehler
-  gui_validation_error_plural: "%{count} Fehler"
 
   field_name: Name
   field_description: Beschreibung
@@ -455,7 +453,7 @@ de:
   label_issue_new: Neues Ticket
   label_issue_plural: Tickets
   label_issue_view_all: Alle Tickets anzeigen
-  label_issues_by: "Tickets von %{value}"
+  label_issues_by: "Tickets pro %{value}"
   label_issue_added: Ticket hinzugefügt
   label_issue_updated: Ticket aktualisiert
   label_document: Dokument
@@ -526,8 +524,6 @@ de:
   label_text: Langer Text
   label_attribute: Attribut
   label_attribute_plural: Attribute
-  label_download: "%{count} Download"
-  label_download_plural: "%{count} Downloads"
   label_no_data: Nichts anzuzeigen
   label_change_status: Statuswechsel
   label_history: Historie
@@ -630,8 +626,6 @@ de:
   label_repository: Projektarchiv
   label_repository_plural: Projektarchive
   label_browse: Codebrowser
-  label_modification: "%{count} Änderung"
-  label_modification_plural: "%{count} Änderungen"
   label_branch: Zweig
   label_tag: Markierung
   label_revision: Revision
@@ -1097,3 +1091,4 @@ de:
   setting_non_working_week_days: Arbeitsfreie Tage
   label_in_the_next_days: in den nächsten
   label_in_the_past_days: in den letzten
+  label_attribute_of_user: "%{name} des Benutzers"

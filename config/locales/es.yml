@@ -345,8 +345,6 @@ es:
   general_text_Yes: 'Sí'
   general_text_no: 'no'
   general_text_yes: 'sí'
-  gui_validation_error: 1 error
-  gui_validation_error_plural: "%{count} errores"
   label_activity: Actividad
   label_add_another_file: Añadir otro fichero
   label_add_note: Añadir una nota
@@ -439,8 +437,6 @@ es:
   label_document_added: Documento añadido
   label_document_new: Nuevo documento
   label_document_plural: Documentos
-  label_download: "%{count} Descarga"
-  label_download_plural: "%{count} Descargas"
   label_downloads_abbr: D/L
   label_duplicated_by: duplicada por
   label_duplicates: duplicada de
@@ -519,8 +515,6 @@ es:
   label_message_plural: Mensajes
   label_message_posted: Mensaje añadido
   label_min_max_length: Longitud mín - máx
-  label_modification: "%{count} modificación"
-  label_modification_plural: "%{count} modificaciones"
   label_modified: modificado
   label_module_plural: Módulos
   label_month: Mes
@@ -1118,3 +1112,4 @@ es:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

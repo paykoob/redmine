@@ -16,18 +16,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 require File.expand_path('../../test_helper', __FILE__)
-require 'account_controller'
-
-# Re-raise errors caught by the controller.
-class AccountController; def rescue_action(e) raise e end; end
 
 class AccountControllerTest < ActionController::TestCase
   fixtures :users, :roles
 
   def setup
-    @controller = AccountController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
     User.current = nil
   end
 
@@ -101,8 +94,21 @@ class AccountControllerTest < ActionController::TestCase
       assert_template 'register'
       assert_not_nil assigns(:user)
 
-      assert_tag 'input', :attributes => {:name => 'user[password]'}
-      assert_tag 'input', :attributes => {:name => 'user[password_confirmation]'}
+      assert_select 'input[name=?]', 'user[password]'
+      assert_select 'input[name=?]', 'user[password_confirmation]'
+    end
+  end
+
+  def test_get_register_should_detect_user_language
+    with_settings :self_registration => '3' do
+      @request.env['HTTP_ACCEPT_LANGUAGE'] = 'fr,fr-fr;q=0.8,en-us;q=0.5,en;q=0.3'
+      get :register
+      assert_response :success
+      assert_not_nil assigns(:user)
+      assert_equal 'fr', assigns(:user).language
+      assert_select 'select[name=?]', 'user[language]' do
+        assert_select 'option[value=fr][selected=selected]'
+      end
     end
   end
 

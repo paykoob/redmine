@@ -1,3 +1,20 @@
+# Redmine - project management software
+# Copyright (C) 2006-2012  Jean-Philippe Lang
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
 require File.expand_path('../../test_helper', __FILE__)
 
 class FilesControllerTest < ActionController::TestCase
@@ -14,9 +31,6 @@ class FilesControllerTest < ActionController::TestCase
            :versions
 
   def setup
-    @controller = FilesController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
     @request.session[:user_id] = nil
     Setting.default_language = 'en'
   end
@@ -68,7 +82,7 @@ class FilesControllerTest < ActionController::TestCase
       end
     end
     assert_redirected_to '/projects/ecookbook/files'
-    a = Attachment.find(:first, :order => 'created_on DESC')
+    a = Attachment.order('created_on DESC').first
     assert_equal 'testfile.txt', a.filename
     assert_equal Project.find(1), a.container
 
@@ -88,7 +102,7 @@ class FilesControllerTest < ActionController::TestCase
       assert_response :redirect
     end
     assert_redirected_to '/projects/ecookbook/files'
-    a = Attachment.find(:first, :order => 'created_on DESC')
+    a = Attachment.order('created_on DESC').first
     assert_equal 'testfile.txt', a.filename
     assert_equal Version.find(2), a.container
   end

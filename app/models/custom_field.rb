@@ -30,6 +30,8 @@ class CustomField < ActiveRecord::Base
   validate :validate_custom_field
   before_validation :set_searchable
 
+  scope :sorted, lambda { order("#{table_name}.position ASC") }
+
   CUSTOM_FIELDS_TABS = [
     {:name => 'IssueCustomField', :partial => 'custom_fields/index',
      :label => :label_issue_plural},
@@ -158,7 +160,13 @@ class CustomField < ActiveRecord::Base
     possible_values_options = possible_values_options(customized)
     if possible_values_options.present?
       keyword = keyword.to_s.downcase
-      possible_values_options.detect {|text, id| text.downcase == keyword}.try(:last)
+      if v = possible_values_options.detect {|text, id| text.downcase == keyword}
+        if v.is_a?(Array)
+          v.last
+        else
+          v
+        end
+      end
     else
       keyword
     end
@@ -256,7 +264,7 @@ class CustomField < ActiveRecord::Base
 
   # to move in project_custom_field
   def self.for_all
-    find(:all, :conditions => ["is_for_all=?", true], :order => 'position')
+    where(:is_for_all => true).order('position').all
   end
 
   def type_name

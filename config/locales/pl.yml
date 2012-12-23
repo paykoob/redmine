@@ -310,10 +310,7 @@ pl:
   general_text_Yes: 'Tak'
   general_text_no: 'nie'
   general_text_yes: 'tak'
-  gui_validation_error: 1 błąd
-  gui_validation_error_plural234: "%{count} błędy"
-  gui_validation_error_plural5: "%{count} błędów"
-  gui_validation_error_plural: "%{count} błędów"
+
   label_activity: Aktywność
   label_add_another_file: Dodaj kolejny plik
   label_add_note: Dodaj notatkę
@@ -410,10 +407,6 @@ pl:
   label_document_added: Dodano dokument
   label_document_new: Nowy dokument
   label_document_plural: Dokumenty
-  label_download: "%{count} Pobranie"
-  label_download_plural234: "%{count} Pobrania"
-  label_download_plural5: "%{count} Pobrań"
-  label_download_plural: "%{count} Pobrania"
   label_downloads_abbr: Pobieranie
   label_duplicated_by: zduplikowane przez
   label_duplicates: duplikuje
@@ -492,10 +485,6 @@ pl:
   label_message_plural: Wiadomości
   label_message_posted: Dodano wiadomość
   label_min_max_length: Min - Maks długość
-  label_modification: "%{count} modyfikacja"
-  label_modification_plural234: "%{count} modyfikacje"
-  label_modification_plural5: "%{count} modyfikacji"
-  label_modification_plural: "%{count} modyfikacje"
   label_modified: zmodyfikowane
   label_module_plural: Moduły
   label_month: Miesiąc
@@ -1098,3 +1087,4 @@ pl:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

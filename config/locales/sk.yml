@@ -183,8 +183,6 @@ sk:
   mail_subject_account_activation_request: "Aktivácia %{value} účtu"
   mail_body_account_activation_request: "Bol zaregistrovaný nový uživateľ %{value}. Aktivácia jeho účtu závisí na vašom potvrdení."
 
-  gui_validation_error: 1 chyba
-  gui_validation_error_plural: "%{count} chyb(y)"
 
   field_name: Názov
   field_description: Popis
@@ -393,8 +391,6 @@ sk:
   label_text: Dlhý text
   label_attribute: Atribut
   label_attribute_plural: Atributy
-  label_download: "%{count} Download"
-  label_download_plural: "%{count} Downloady"
   label_no_data: Žiadné položky
   label_change_status: Zmeniť stav
   label_history: História
@@ -494,8 +490,6 @@ sk:
   label_repository: Repozitár
   label_repository_plural: Repozitáre
   label_browse: Prechádzať
-  label_modification: "%{count} zmena"
-  label_modification_plural: "%{count} zmien"
   label_revision: Revízia
   label_revision_plural: Revízií
   label_associated_revisions: Súvisiace verzie
@@ -1081,3 +1075,4 @@ sk:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

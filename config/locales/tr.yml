@@ -204,8 +204,6 @@ tr:
   mail_subject_account_activation_request: "%{value} hesabı etkinleştirme isteği"
   mail_body_account_activation_request: "Yeni bir kullanıcı (%{value}) kaydedildi. Hesap onaylanmayı bekliyor:"
 
-  gui_validation_error: 1 hata
-  gui_validation_error_plural: "%{count} hata"
 
   field_name: İsim
   field_description: Yorum
@@ -413,8 +411,6 @@ tr:
   label_text: Uzun Metin
   label_attribute: Nitelik
   label_attribute_plural: Nitelikler
-  label_download: "%{count} indirme"
-  label_download_plural: "%{count} indirme"
   label_no_data: Gösterilecek veri yok
   label_change_status: Değişim Durumu
   label_history: Geçmiş
@@ -514,8 +510,6 @@ tr:
   label_repository: Depo
   label_repository_plural: Depolar
   label_browse: Gözat
-  label_modification: "%{count} değişim"
-  label_modification_plural: "%{count} değişim"
   label_revision: Değişiklik
   label_revision_plural: Değişiklikler
   label_associated_revisions: Birleştirilmiş değişiklikler
@@ -1100,3 +1094,4 @@ tr:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

@@ -18,13 +18,19 @@
 class Principal < ActiveRecord::Base
   self.table_name = "#{table_name_prefix}users#{table_name_suffix}"
 
+  # Account statuses
+  STATUS_ANONYMOUS  = 0
+  STATUS_ACTIVE     = 1
+  STATUS_REGISTERED = 2
+  STATUS_LOCKED     = 3
+
   has_many :members, :foreign_key => 'user_id', :dependent => :destroy
   has_many :memberships, :class_name => 'Member', :foreign_key => 'user_id', :include => [ :project, :roles ], :conditions => "#{Project.table_name}.status<>#{Project::STATUS_ARCHIVED}", :order => "#{Project.table_name}.name"
   has_many :projects, :through => :memberships
   has_many :issue_categories, :foreign_key => 'assigned_to_id', :dependent => :nullify
 
   # Groups and active users
-  scope :active, :conditions => "#{Principal.table_name}.status = 1"
+  scope :active, lambda { where(:status => STATUS_ACTIVE) }
 
   scope :like, lambda {|q|
     q = q.to_s
@@ -51,7 +57,7 @@ class Principal < ActiveRecord::Base
       where("1=0")
     else
       ids = projects.map(&:id)
-      where("#{Principal.table_name}.status = 1 AND #{Principal.table_name}.id IN (SELECT DISTINCT user_id FROM #{Member.table_name} WHERE project_id IN (?))", ids)
+      active.where("#{Principal.table_name}.id IN (SELECT DISTINCT user_id FROM #{Member.table_name} WHERE project_id IN (?))", ids)
     end
   }
   # Principals that are not members of projects

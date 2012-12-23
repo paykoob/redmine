@@ -231,8 +231,6 @@ et:
   mail_subject_wiki_content_updated: "Uuendati '%{id}' vikilehte"
   mail_body_wiki_content_updated: "'%{id}' vikilehte uuendati %{author} poolt."
 
-  gui_validation_error: "1 viga"
-  gui_validation_error_plural: "%{count} viga"
 
   field_name: "Nimi"
   field_description: "Kirjeldus"
@@ -569,8 +567,6 @@ et:
   label_text: "Pikk tekst"
   label_attribute: "Atribuut"
   label_attribute_plural: "Atribuudid"
-  label_download: "%{count} allalaadimine"
-  label_download_plural: "%{count} allalaadimist"
   label_no_data: "Pole"
   label_change_status: "Muuda olekut"
   label_history: "Ajalugu"
@@ -681,8 +677,6 @@ et:
   label_repository_new: "Uus hoidla"
   label_repository_plural: "Hoidlad"
   label_browse: "Sirvi"
-  label_modification: "%{count} muudatus"
-  label_modification_plural: "%{count} muudatust"
   label_branch: "Haru"
   label_tag: "Sildiga"
   label_revision: "Sissekanne"
@@ -1094,3 +1088,4 @@ et:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

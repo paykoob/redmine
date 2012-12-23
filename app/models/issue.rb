@@ -70,18 +70,19 @@ class Issue < ActiveRecord::Base
   validates_numericality_of :estimated_hours, :allow_nil => true
   validate :validate_issue, :validate_required_fields
 
-  scope :visible,
-        lambda {|*args| { :include => :project,
-                          :conditions => Issue.visible_condition(args.shift || User.current, *args) } }
+  scope :visible, lambda {|*args|
+    includes(:project).where(Issue.visible_condition(args.shift || User.current, *args))
+  }
 
   scope :open, lambda {|*args|
     is_closed = args.size > 0 ? !args.first : false
-    {:conditions => ["#{IssueStatus.table_name}.is_closed = ?", is_closed], :include => :status}
+    includes(:status).where("#{IssueStatus.table_name}.is_closed = ?", is_closed)
   }
 
-  scope :recently_updated, :order => "#{Issue.table_name}.updated_on DESC"
-  scope :on_active_project, :include => [:status, :project, :tracker],
-                            :conditions => ["#{Project.table_name}.status=#{Project::STATUS_ACTIVE}"]
+  scope :recently_updated, lambda { order("#{Issue.table_name}.updated_on DESC") }
+  scope :on_active_project, lambda {
+    includes(:status, :project, :tracker).where("#{Project.table_name}.status = ?", Project::STATUS_ACTIVE)
+  }
 
   before_create :default_assign
   before_save :close_duplicates, :update_done_ratio_from_issue_status, :force_updated_on_change
@@ -132,6 +133,11 @@ class Issue < ActiveRecord::Base
         !self.is_private?
       end
     end
+  end
+
+  # Returns true if user or current user is allowed to edit or add a note to the issue
+  def editable?(user=User.current)
+    user.allowed_to?(:edit_issues, project) || user.allowed_to?(:add_issue_notes, project)
   end
 
   def initialize(attributes=nil, *args)
@@ -786,7 +792,7 @@ class Issue < ActiveRecord::Base
   end
 
   def relations
-    @relations ||= IssueRelations.new(self, (relations_from + relations_to).sort)
+    @relations ||= IssueRelation::Relations.new(self, (relations_from + relations_to).sort)
   end
 
   # Preloads relations for a collection of issues
@@ -823,7 +829,7 @@ class Issue < ActiveRecord::Base
           relations_from.select {|relation| relation.issue_from_id == issue.id} +
           relations_to.select {|relation| relation.issue_to_id == issue.id}
 
-        issue.instance_variable_set "@relations", IssueRelations.new(issue, relations.sort)
+        issue.instance_variable_set "@relations", IssueRelation::Relations.new(issue, relations.sort)
       end
     end
   end

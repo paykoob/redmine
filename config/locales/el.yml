@@ -194,8 +194,6 @@ el:
   mail_subject_wiki_content_updated: "'ενημερώθηκε η σελίδα wiki %{id}' "
   mail_body_wiki_content_updated: "Η σελίδα wiki  '%{id}' ενημερώθηκε από τον %{author}."
 
-  gui_validation_error: 1 σφάλμα
-  gui_validation_error_plural: "%{count} σφάλματα"
 
   field_name: Όνομα
   field_description: Περιγραφή
@@ -474,8 +472,6 @@ el:
   label_text: Μακροσκελές κείμενο
   label_attribute: Ιδιότητα
   label_attribute_plural: Ιδιότητες
-  label_download: "%{count} Μεταφόρτωση"
-  label_download_plural: "%{count} Μεταφορτώσεις"
   label_no_data: Δεν υπάρχουν δεδομένα
   label_change_status: Αλλαγή κατάστασης
   label_history: Ιστορικό
@@ -577,8 +573,6 @@ el:
   label_repository: Αποθετήριο
   label_repository_plural: Αποθετήρια
   label_browse: Πλοήγηση
-  label_modification: "%{count} τροποποίηση"
-  label_modification_plural: "%{count} τροποποιήσεις"
   label_branch: Branch
   label_tag: Tag
   label_revision: Αναθεώρηση
@@ -1081,3 +1075,4 @@ el:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}

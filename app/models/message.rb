@@ -29,6 +29,7 @@ class Message < ActiveRecord::Base
                      :date_column => "#{table_name}.created_on"
   acts_as_event :title => Proc.new {|o| "#{o.board.name}: #{o.subject}"},
                 :description => :content,
+                :group => :parent,
                 :type => Proc.new {|o| o.parent_id.nil? ? 'message' : 'reply'},
                 :url => Proc.new {|o| {:controller => 'messages', :action => 'show', :board_id => o.board_id}.merge(o.parent_id.nil? ? {:id => o.id} :
                                                                                                                                        {:id => o.parent_id, :r => o.id, :anchor => "message-#{o.id}"})}
@@ -45,8 +46,9 @@ class Message < ActiveRecord::Base
   after_update :update_messages_board
   after_destroy :reset_counters!
 
-  scope :visible, lambda {|*args| { :include => {:board => :project},
-                                          :conditions => Project.allowed_to_condition(args.shift || User.current, :view_messages, *args) } }
+  scope :visible, lambda {|*args|
+    includes(:board => :project).where(Project.allowed_to_condition(args.shift || User.current, :view_messages, *args))
+  }
 
   safe_attributes 'subject', 'content'
   safe_attributes 'locked', 'sticky', 'board_id',
@@ -65,7 +67,7 @@ class Message < ActiveRecord::Base
 
   def update_messages_board
     if board_id_changed?
-      Message.update_all("board_id = #{board_id}", ["id = ? OR parent_id = ?", root.id, root.id])
+      Message.update_all({:board_id => board_id}, ["id = ? OR parent_id = ?", root.id, root.id])
       Board.reset_counters!(board_id_was)
       Board.reset_counters!(board_id)
     end
