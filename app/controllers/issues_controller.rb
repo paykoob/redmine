@@ -402,7 +402,9 @@ class IssuesController < ApplicationController
       render_error l(:error_no_tracker_in_project)
       return false
     end
-    @issue.start_date ||= Date.today if Setting.default_issue_start_date_to_creation_date?
+#    @issue.start_date ||= Date.today if Setting.default_issue_start_date_to_creation_date?
+    @issue.start_date ||= JalaliDate.to_jalali(Date.today).to_date if Setting.default_issue_start_date_to_creation_date?
+
     @issue.safe_attributes = params[:issue]
 
     @priorities = IssuePriority.active
