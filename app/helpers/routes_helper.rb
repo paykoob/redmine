@@ -17,27 +17,23 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module ReportsHelper
+module RoutesHelper
 
-  def aggregate(data, criteria)
-    a = 0
-    data.each { |row|
-      match = 1
-      criteria.each { |k, v|
-        match = 0 unless (row[k].to_s == v.to_s) || (k == 'closed' && row[k] == (v == 0 ? "f" : "t"))
-      } unless criteria.nil?
-      a = a + row["total"].to_i if match == 1
-    } unless data.nil?
-    a
+  # Returns the path to project issues or to the cross-project
+  # issue list if project is nil
+  def _project_issues_path(project, *args)
+    if project
+      project_issues_path(project, *args)
+    else
+      issues_path(*args)
+    end
   end
 
-  def aggregate_link(data, criteria, *args)
-    a = aggregate data, criteria
-    a > 0 ? link_to(h(a), *args) : '-'
+  def _project_calendar_path(project, *args)
+    project ? project_calendar_path(project, *args) : issues_calendar_path(*args)
   end
 
-  def aggregate_path(project, field, row, options={})
-    parameters = {:set_filter => 1, :subproject_id => '!*', field => row.id}.merge(options)
-    project_issues_path(row.is_a?(Project) ? row : project, parameters)
+  def _project_gantt_path(project, *args)
+    project ? project_gantt_path(project, *args) : issues_gantt_path(*args)
   end
 end
