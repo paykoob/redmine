@@ -45,7 +45,7 @@ class Attachment < ActiveRecord::Base
                                               :joins => "LEFT JOIN #{Document.table_name} ON #{Attachment.table_name}.container_type='Document' AND #{Document.table_name}.id = #{Attachment.table_name}.container_id " +
                                                         "LEFT JOIN #{Project.table_name} ON #{Document.table_name}.project_id = #{Project.table_name}.id"}
 
-  cattr_accessor :storage_path
+  cattr_accessor :storage_path , :disk_directory
   @@storage_path = Redmine::Configuration['attachments_storage_path'] || File.join(Rails.root, "files")
 
   cattr_accessor :thumbnails_storage_path
@@ -53,6 +53,10 @@ class Attachment < ActiveRecord::Base
 
   before_save :files_to_final_location
   after_destroy :delete_from_disk
+
+  def disk_directory
+    @disk_directory
+  end
 
   # Returns an unsaved copy of the attachment
   def copy(attributes=nil)
