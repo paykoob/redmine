@@ -659,7 +659,6 @@ nl:
   permission_log_time: Gespendeerde tijd loggen
   permission_manage_boards: Forums beheren
   permission_manage_categories: Issue-categorieën beheren
-  permission_manage_documents: Documenten beheren
   permission_manage_files: Bestanden beheren
   permission_manage_issue_relations: Issuerelaties beheren
   permission_manage_members: Leden beheren
@@ -909,7 +908,6 @@ nl:
   label_principal_search: "Zoek naar gebruiker of groep:"
   label_user_search: "Zoek naar gebruiker:"
   field_visible: Zichtbaar
-  setting_emails_header: Emails header
   setting_commit_logtime_activity_id: Standaard activiteit voor tijdregistratie
   text_time_logged_by_changeset: Toegepast in changeset %{value}.
   setting_commit_logtime_enabled: Activeer tijdregistratie
@@ -1058,3 +1056,17 @@ nl:
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
   label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  field_generate_password: Generate password
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Totaal
+  setting_emails_header: Email header

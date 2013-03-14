@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -212,13 +212,13 @@ class WikiController < ApplicationController
   # show page history
   def history
     @version_count = @page.content.versions.count
-    @version_pages = Paginator.new self, @version_count, per_page_option, params['page']
+    @version_pages = Paginator.new @version_count, per_page_option, params['page']
     # don't load text
     @versions = @page.content.versions.
       select("id, author_id, comments, updated_on, version").
       reorder('version DESC').
-      limit(@version_pages.items_per_page + 1).
-      offset(@version_pages.current.offset).
+      limit(@version_pages.per_page + 1).
+      offset(@version_pages.offset).
       all
 
     render :layout => false if request.xhr?
@@ -272,7 +272,7 @@ class WikiController < ApplicationController
 
     @content = @page.content_for_version(params[:version])
     @content.destroy
-    redirect_to_referer_or history_project_wiki_page_path(@project, @page.title) 
+    redirect_to_referer_or history_project_wiki_page_path(@project, @page.title)
   end
 
   # Export wiki to a single pdf or html file
@@ -351,6 +351,6 @@ private
   end
 
   def load_pages_for_index
-    @pages = @wiki.pages.with_updated_on.order("#{WikiPage.table_name}.title").includes(:wiki => :project).includes(:parent).all
+    @pages = @wiki.pages.with_updated_on.reorder("#{WikiPage.table_name}.title").includes(:wiki => :project).includes(:parent).all
   end
 end

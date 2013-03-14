@@ -25,7 +25,7 @@ h4 {border-bottom: 1px dotted #bbb;}
 
 #account {float:right;}
 
-#header {height:5.3em;margin:0;background-color:#628DB6;color:#f8f8f8; padding: 4px 8px 0px 6px; position:relative;}
+#header {min-height:5.3em;margin:0;background-color:#628DB6;color:#f8f8f8; padding: 4px 8px 20px 6px; position:relative;}
 #header a {color:#f8f8f8;}
 #header h1 a.ancestor { font-size: 80%; }
 #quick-search {float:right;}
@@ -76,6 +76,8 @@ h4 {border-bottom: 1px dotted #bbb;}
 #sidebar hr{ width: 100%; margin: 0 auto; height: 1px; background: #ccc; border: 0; }
 * html #sidebar hr{ width: 95%; position: relative; left: -6px; color: #ccc; }
 #sidebar .contextual { margin-right: 1em; }
+#sidebar ul {margin: 0;  padding: 0;}
+#sidebar ul li {list-style-type:none;margin: 0px 2px 0px 0px; padding: 0px 0px 0px 0px;}
 
 #content { width: 75%; background-color: #fff; margin: 0px; border-right: 1px solid #ddd; padding: 6px 10px 10px 10px; z-index: 10; }
 * html #content{ width: 75%; padding-left: 0; margin-top: 0px; padding: 6px 10px 10px 10px;}
@@ -267,10 +269,8 @@ div.members h3 { background: url(../images/group.png) no-repeat 0% 50%; padding-
 div.news h3 { background: url(../images/news.png) no-repeat 0% 50%; padding-left: 20px; }
 div.projects h3 { background: url(../images/projects.png) no-repeat 0% 50%; padding-left: 20px; }
 
-#watchers ul {margin: 0;  padding: 0;}
-#watchers li {list-style-type:none;margin: 0px 2px 0px 0px; padding: 0px 0px 0px 0px;}
 #watchers select {width: 95%; display: block;}
-#watchers a.delete {opacity: 0.4;}
+#watchers a.delete {opacity: 0.4; vertical-align: middle;}
 #watchers a.delete:hover {opacity: 1;}
 #watchers img.gravatar {margin: 0 4px 2px 0;}
 
@@ -337,8 +337,8 @@ div.issue table.attributes td {width:28%;}
 #relations td.buttons {padding:0;}
 
 fieldset.collapsible { border-width: 1px 0 0 0; font-size: 0.9em; }
-fieldset.collapsible legend { padding-left: 16px; background: url(../images/arrow_expanded.png) no-repeat 0% 40%; cursor:pointer; }
-fieldset.collapsible.collapsed legend { background-image: url(../images/arrow_collapsed.png); }
+fieldset.collapsible>legend { padding-left: 16px; background: url(../images/arrow_expanded.png) no-repeat 0% 40%; cursor:pointer; }
+fieldset.collapsible.collapsed>legend { background-image: url(../images/arrow_collapsed.png); }
 
 fieldset#date-range p { margin: 2px 0 2px 0; }
 fieldset#filters table { border-collapse: collapse; }
@@ -454,6 +454,8 @@ table.fields_permissions td.readonly {background:#ddd;}
 table.fields_permissions td.required {background:#d88;}
 
 textarea#custom_field_possible_values {width: 99%}
+textarea#custom_field_default_value {width: 99%}
+
 input#content_comments {width: 99%}
 
 p.pagination {margin-top:8px; font-size: 90%}
@@ -556,29 +558,31 @@ em.info.error {padding-left:20px; background:url(../images/exclamation.png) no-r
 
 textarea.text_cf {width:90%;}
 
-/* Project members tab */
-div#tab-content-members .splitcontentleft, div#tab-content-memberships .splitcontentleft, div#tab-content-users .splitcontentleft { width: 64% }
-div#tab-content-members .splitcontentright, div#tab-content-memberships .splitcontentright, div#tab-content-users .splitcontentright { width: 34% }
-div#tab-content-members fieldset, div#tab-content-memberships fieldset, div#tab-content-users fieldset { padding:1em; margin-bottom: 1em; }
-div#tab-content-members fieldset legend, div#tab-content-memberships fieldset legend, div#tab-content-users fieldset legend { font-weight: bold; }
-div#tab-content-members fieldset label, div#tab-content-memberships fieldset label, div#tab-content-users fieldset label { display: block; }
-div#tab-content-members fieldset div, div#tab-content-users fieldset div { max-height: 400px; overflow:auto; }
+#tab-content-modules fieldset p {margin:3px 0 4px 0;}
+
+#tab-content-members .splitcontentleft, #tab-content-memberships .splitcontentleft, #tab-content-users .splitcontentleft {width: 64%;}
+#tab-content-members .splitcontentright, #tab-content-memberships .splitcontentright, #tab-content-users .splitcontentright {width: 34%;}
+#tab-content-members fieldset, #tab-content-memberships fieldset, #tab-content-users fieldset {padding:1em; margin-bottom: 1em;}
+#tab-content-members fieldset legend, #tab-content-memberships fieldset legend, #tab-content-users fieldset legend {font-weight: bold;}
+#tab-content-members fieldset label, #tab-content-memberships fieldset label, #tab-content-users fieldset label {display: block;}
+#tab-content-members #principals, #tab-content-users #principals {max-height: 400px; overflow: auto;}
+
+#tab-content-memberships .splitcontentright select {width:90%}
 
 #users_for_watcher {height: 200px; overflow:auto;}
 #users_for_watcher label {display: block;}
 
 table.members td.group { padding-left: 20px; background: url(../images/group.png) no-repeat 0% 50%; }
 
-input#principal_search, input#user_search {width:100%}
-input#principal_search, input#user_search {
-  background: url(../images/magnifier.png) no-repeat 2px 50%; padding-left:20px;
-  border:1px solid #9EB1C2; border-radius:3px; height:1.5em; width:95%;
+input#principal_search, input#user_search {width:90%}
+
+input.autocomplete {
+  background: #fff url(../images/magnifier.png) no-repeat 2px 50%; padding-left:20px;
+  border:1px solid #9EB1C2; border-radius:2px; height:1.5em;
 }
-input#principal_search.ajax-loading, input#user_search.ajax-loading {
+input.autocomplete.ajax-loading {
   background-image: url(../images/loading.gif);
 }
-
-* html div#tab-content-members fieldset div { height: 450px; }
 
 /***** Flash & error messages ****/
 #errorExplanation, div.flash, .nodata, .warning, .conflict {
@@ -701,7 +705,7 @@ table.progress td { height: 1em; }
 table.progress td.closed { background: #BAE0BA none repeat scroll 0%; }
 table.progress td.done { background: #D3EDD3 none repeat scroll 0%; }
 table.progress td.todo { background: #eee none repeat scroll 0%; }
-p.pourcent {font-size: 80%;}
+p.percent {font-size: 80%;}
 p.progress-info {clear: left; font-size: 80%; margin-top:-4px; color:#777;}
 
 #roadmap table.progress td { height: 1.2em; }

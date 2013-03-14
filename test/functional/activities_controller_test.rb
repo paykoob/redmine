@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@ class ActivitiesControllerTest < ActionController::TestCase
            :members,
            :groups_users,
            :enabled_modules,
-           :workflows,
            :journals, :journal_details
 
 
@@ -46,7 +45,7 @@ class ActivitiesControllerTest < ActionController::TestCase
   end
 
   def test_previous_project_index
-    get :index, :id => 1, :from => 3.days.ago.to_date
+    get :index, :id => 1, :from => 2.days.ago.to_date
     assert_response :success
     assert_template 'index'
     assert_not_nil assigns(:events_by_day)

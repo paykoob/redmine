@@ -238,6 +238,7 @@ fr:
   field_author: Auteur
   field_created_on: "Créé "
   field_updated_on: "Mis-à-jour "
+  field_closed_on: Fermé
   field_field_format: Format
   field_is_for_all: Pour tous les projets
   field_possible_values: Valeurs possibles
@@ -329,6 +330,8 @@ fr:
   field_timeout: "Timeout (en secondes)"
   field_board_parent: Forum parent
   field_private_notes: Notes privées
+  field_inherit_members: Hériter les membres
+  field_generate_password: Générer un mot de passe
 
   setting_app_title: Titre de l'application
   setting_app_subtitle: Sous-titre de l'application
@@ -394,6 +397,8 @@ fr:
   setting_thumbnails_enabled: Afficher les vignettes des images
   setting_thumbnails_size: Taille des vignettes (en pixels)
   setting_non_working_week_days: Jours non travaillés
+  setting_jsonp_enabled: Activer le support JSONP
+  setting_default_projects_tracker_ids: Trackers par défaut pour les nouveaux projets
 
   permission_add_project: Créer un projet
   permission_add_subprojects: Créer des sous-projets
@@ -429,8 +434,10 @@ fr:
   permission_edit_own_time_entries: Modifier son propre temps passé
   permission_manage_news: Gérer les annonces
   permission_comment_news: Commenter les annonces
-  permission_manage_documents: Gérer les documents
   permission_view_documents: Voir les documents
+  permission_add_documents: Ajouter des documents
+  permission_edit_documents: Modifier les documents
+  permission_delete_documents: Supprimer les documents
   permission_manage_files: Gérer les fichiers
   permission_view_files: Voir les fichiers
   permission_manage_wiki: Gérer le wiki
@@ -606,6 +613,7 @@ fr:
     one:   1 demande
     other: "%{count} demandes"
   label_total: Total
+  label_total_time: Temps total
   label_permissions: Permissions
   label_current_status: Statut actuel
   label_new_statuses_allowed: Nouveaux statuts autorisés
@@ -851,6 +859,7 @@ fr:
   label_readonly: Lecture
   label_required: Obligatoire
   label_attribute_of_project: "%{name} du projet"
+  label_attribute_of_issue: "%{name} de la demande"
   label_attribute_of_author: "%{name} de l'auteur"
   label_attribute_of_assigned_to: "%{name} de l'assigné"
   label_attribute_of_user: "%{name} de l'utilisateur"
@@ -859,6 +868,7 @@ fr:
   label_cross_project_tree: Avec tout l'arbre
   label_cross_project_hierarchy: Avec toute la hiérarchie
   label_cross_project_system: Avec tous les projets
+  label_gantt_progress_line: Ligne de progression
 
   button_login: Connexion
   button_submit: Soumettre
@@ -934,7 +944,7 @@ fr:
   text_tip_issue_begin_day: tâche commençant ce jour
   text_tip_issue_end_day: tâche finissant ce jour
   text_tip_issue_begin_end_day: tâche commençant et finissant ce jour
-  text_project_identifier_info: 'Seuls les lettres minuscules (a-z), chiffres, tirets et underscore sont autorisés.<br />Un fois sauvegardé, l''identifiant ne pourra plus être modifié.'
+  text_project_identifier_info: 'Seuls les lettres minuscules (a-z), chiffres, tirets et underscore sont autorisés, doit commencer par une minuscule.<br />Un fois sauvegardé, l''identifiant ne pourra plus être modifié.'
   text_caracters_maximum: "%{count} caractères maximum."
   text_caracters_minimum: "%{count} caractères minimum."
   text_length_between: "Longueur comprise entre %{min} et %{max} caractères."
@@ -984,6 +994,7 @@ fr:
   text_account_destroy_confirmation: "Êtes-vous sûr de vouloir continuer ?\nVotre compte sera définitivement supprimé, sans aucune possibilité de le réactiver."
   text_session_expiration_settings: "Attention : le changement de ces paramètres peut entrainer l'expiration des sessions utilisateurs en cours, y compris la vôtre."
   text_project_closed: Ce projet est fermé et accessible en lecture seule.
+  text_turning_multiple_off: "Si vous désactivez les valeurs multiples, les valeurs multiples seront supprimées pour n'en conserver qu'une par objet."
 
   default_role_manager: "Manager "
   default_role_developer: "Développeur "

@@ -1,5 +1,5 @@
 /* Redmine - project management software
-   Copyright (C) 2006-2012  Jean-Philippe Lang */
+   Copyright (C) 2006-2013  Jean-Philippe Lang */
 
 function checkAll(id, checked) {
   if (checked) {
@@ -456,18 +456,22 @@ function updateBulkEditFrom(url) {
   });
 }
 
-function observeAutocompleteField(fieldId, url) {
+function observeAutocompleteField(fieldId, url, options) {
   $(document).ready(function() {
-    $('#'+fieldId).autocomplete({
+    $('#'+fieldId).autocomplete($.extend({
       source: url,
-      minLength: 2
-    });
+      minLength: 2,
+      search: function(){$('#'+fieldId).addClass('ajax-loading');},
+      response: function(){$('#'+fieldId).removeClass('ajax-loading');},
+    }, options));
+    $('#'+fieldId).addClass('autocomplete');
   });
 }
 
 function observeSearchfield(fieldId, targetId, url) {
   $('#'+fieldId).each(function() {
     var $this = $(this);
+    $this.addClass('autocomplete');
     $this.attr('data-value-was', $this.val());
     var check = function() {
       var val = $this.val();
@@ -477,7 +481,7 @@ function observeSearchfield(fieldId, targetId, url) {
           url: url,
           type: 'get',
           data: {q: $this.val()},
-          success: function(data){ $('#'+targetId).html(data); },
+          success: function(data){ if(targetId) $('#'+targetId).html(data); },
           beforeSend: function(){ $this.addClass('ajax-loading'); },
           complete: function(){ $this.removeClass('ajax-loading'); }
         });

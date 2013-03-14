@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -148,5 +148,21 @@ class AuthSourcesControllerTest < ActionController::TestCase
     assert_redirected_to '/auth_sources'
     assert_not_nil flash[:error]
     assert_include 'Something went wrong', flash[:error]
+  end
+
+  def test_autocomplete_for_new_user
+    AuthSource.expects(:search).with('foo').returns([
+      {:login => 'foo1', :firstname => 'John', :lastname => 'Smith', :mail => 'foo1@example.net', :auth_source_id => 1},
+      {:login => 'Smith', :firstname => 'John', :lastname => 'Doe', :mail => 'foo2@example.net', :auth_source_id => 1}
+    ])
+
+    get :autocomplete_for_new_user, :term => 'foo'
+    assert_response :success
+    assert_equal 'application/json', response.content_type
+    json = ActiveSupport::JSON.decode(response.body)
+    assert_kind_of Array, json
+    assert_equal 2, json.size
+    assert_equal 'foo1', json.first['value']
+    assert_equal 'foo1 (John Smith)', json.first['label']
   end
 end

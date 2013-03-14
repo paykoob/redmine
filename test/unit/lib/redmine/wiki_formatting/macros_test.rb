@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -76,6 +76,12 @@ class Redmine::WikiFormatting::MacrosTest < ActionView::TestCase
     assert_equal "<p>Baz: () (NilClass) ()</p>", textilizable("{{baz()}}")
     assert_equal "<p>Baz: () (String) (line1\nline2)</p>", textilizable("{{baz()\nline1\nline2\n}}")
     assert_equal "<p>Baz: (arg1,arg2) (String) (line1\nline2)</p>", textilizable("{{baz(arg1, arg2)\nline1\nline2\n}}")
+  end
+
+  def test_macro_name_with_upper_case
+    Redmine::WikiFormatting::Macros.macro(:UpperCase) {|obj, args| "Upper"}
+
+    assert_equal "<p>Upper</p>", textilizable("{{UpperCase}}")
   end
 
   def test_multiple_macros_on_the_same_line

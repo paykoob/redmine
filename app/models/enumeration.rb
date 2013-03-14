@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@ class Enumeration < ActiveRecord::Base
 
   acts_as_list :scope => 'type = \'#{type}\''
   acts_as_customizable
-  acts_as_tree :order => 'position ASC'
+  acts_as_tree :order => "#{Enumeration.table_name}.position ASC"
 
   before_destroy :check_integrity
   before_save    :check_default

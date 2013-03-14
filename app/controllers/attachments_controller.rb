@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -128,7 +128,12 @@ private
 
   # Checks that the file exists and is readable
   def file_readable
-    @attachment.readable? ? true : render_404
+    if @attachment.readable?
+      true
+    else
+      logger.error "Cannot send attachment, #{@attachment.diskfile} does not exist or is unreadable."
+      render_404
+    end
   end
 
   def read_authorize

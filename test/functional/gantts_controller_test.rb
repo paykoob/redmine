@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@ class GanttsControllerTest < ActionController::TestCase
            :member_roles,
            :members,
            :enabled_modules,
-           :workflows,
            :versions
 
   def test_gantt_should_work
@@ -79,6 +78,22 @@ class GanttsControllerTest < ActionController::TestCase
     assert_no_tag 'a', {:content => /OnlineStore/}
     # Private children of a public project
     assert_no_tag 'a', :content => /Private child of eCookbook/
+  end
+
+  def test_gantt_should_display_relations
+    IssueRelation.delete_all
+    issue1 = Issue.generate!(:start_date => 1.day.from_now.to_date, :due_date => 3.day.from_now.to_date)
+    issue2 = Issue.generate!(:start_date => 1.day.from_now.to_date, :due_date => 3.day.from_now.to_date)
+    IssueRelation.create!(:issue_from => issue1, :issue_to => issue2, :relation_type => 'precedes')
+
+    get :show
+    assert_response :success
+
+    relations = assigns(:gantt).relations
+    assert_kind_of Hash, relations
+    assert relations.present?
+    assert_select 'div.task_todo[id=?][data-rels*=?]', "task-todo-issue-#{issue1.id}", issue2.id.to_s
+    assert_select 'div.task_todo[id=?]:not([data-rels])', "task-todo-issue-#{issue2.id}"
   end
 
   def test_gantt_should_export_to_pdf

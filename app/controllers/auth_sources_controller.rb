@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -70,6 +70,20 @@ class AuthSourcesController < ApplicationController
       flash[:notice] = l(:notice_successful_delete)
     end
     redirect_to auth_sources_path
+  end
+
+  def autocomplete_for_new_user
+    results = AuthSource.search(params[:term])
+
+    render :json => results.map {|result| {
+      'value' => result[:login],
+      'label' => "#{result[:login]} (#{result[:firstname]} #{result[:lastname]})",
+      'login' => result[:login].to_s,
+      'firstname' => result[:firstname].to_s,
+      'lastname' => result[:lastname].to_s,
+      'mail' => result[:mail].to_s,
+      'auth_source_id' => result[:auth_source_id].to_s
+    }}
   end
 
   private

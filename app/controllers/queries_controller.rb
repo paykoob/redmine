@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ class QueriesController < ApplicationController
     end
 
     @query_count = IssueQuery.visible.count
-    @query_pages = Paginator.new self, @query_count, @limit, params['page']
+    @query_pages = Paginator.new @query_count, @limit, params['page']
     @queries = IssueQuery.visible.all(:limit => @limit, :offset => @offset, :order => "#{Query.table_name}.name")
 
     respond_to do |format|

@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -31,6 +31,14 @@ class AccountControllerTest < ActionController::TestCase
 
     assert_select 'input[name=username]'
     assert_select 'input[name=password]'
+  end
+
+  def test_get_login_while_logged_in_should_redirect_to_home
+    @request.session[:user_id] = 2
+
+    get :login
+    assert_redirected_to '/'
+    assert_equal 2, @request.session[:user_id]
   end
 
   def test_login_should_redirect_to_back_url_param
@@ -72,9 +80,18 @@ class AccountControllerTest < ActionController::TestCase
     assert_response 302
   end
 
-  def test_logout
+  def test_get_logout_should_not_logout
     @request.session[:user_id] = 2
     get :logout
+    assert_response :success
+    assert_template 'logout'
+
+    assert_equal 2, @request.session[:user_id]
+  end
+
+  def test_logout
+    @request.session[:user_id] = 2
+    post :logout
     assert_redirected_to '/'
     assert_nil @request.session[:user_id]
   end
@@ -83,7 +100,7 @@ class AccountControllerTest < ActionController::TestCase
     @controller.expects(:reset_session).once
 
     @request.session[:user_id] = 2
-    get :logout
+    post :logout
     assert_response 302
   end
 

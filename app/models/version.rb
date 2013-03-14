@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -30,10 +30,9 @@ class Version < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name, :scope => [:project_id]
   validates_length_of :name, :maximum => 60
-  validates_format_of :effective_date, :with => /\A\d{4}-\d{2}-\d{2}\z/, :message => :not_a_date, :allow_nil => true
+  validates :effective_date, :date => true
   validates_inclusion_of :status, :in => VERSION_STATUSES
   validates_inclusion_of :sharing, :in => VERSION_SHARINGS
-  validate :validate_version
 
   scope :named, lambda {|arg| where("LOWER(#{table_name}.name) = LOWER(?)", arg.to_s.strip)}
   scope :open, lambda { where(:status => 'open') }
@@ -99,10 +98,10 @@ class Version < ActiveRecord::Base
   end
 
   def behind_schedule?
-    if completed_pourcent == 100
+    if completed_percent == 100
       return false
     elsif due_date && start_date
-      done_date = start_date + ((due_date - start_date+1)* completed_pourcent/100).floor
+      done_date = start_date + ((due_date - start_date+1)* completed_percent/100).floor
       return done_date <= Date.today
     else
       false # No issues so it's not late
@@ -111,7 +110,7 @@ class Version < ActiveRecord::Base
 
   # Returns the completion percentage of this version based on the amount of open/closed issues
   # and the time spent on the open issues.
-  def completed_pourcent
+  def completed_percent
     if issues_count == 0
       0
     elsif open_issues_count == 0
@@ -121,13 +120,25 @@ class Version < ActiveRecord::Base
     end
   end
 
+  # TODO: remove in Redmine 3.0
+  def completed_pourcent
+    ActiveSupport::Deprecation.warn "Version#completed_pourcent is deprecated and will be removed in Redmine 3.0. Please use #completed_percent instead."
+    completed_percent
+  end
+
   # Returns the percentage of issues that have been marked as 'closed'.
-  def closed_pourcent
+  def closed_percent
     if issues_count == 0
       0
     else
       issues_progress(false)
     end
+  end
+
+  # TODO: remove in Redmine 3.0
+  def closed_pourcent
+    ActiveSupport::Deprecation.warn "Version#closed_pourcent is deprecated and will be removed in Redmine 3.0. Please use #closed_percent instead."
+    closed_percent
   end
 
   # Returns true if the version is overdue: due date reached and some open issues

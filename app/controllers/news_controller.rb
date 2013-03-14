@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -40,8 +40,8 @@ class NewsController < ApplicationController
     scope = @project ? @project.news.visible : News.visible
 
     @news_count = scope.count
-    @news_pages = Paginator.new self, @news_count, @limit, params['page']
-    @offset ||= @news_pages.current.offset
+    @news_pages = Paginator.new @news_count, @limit, params['page']
+    @offset ||= @news_pages.offset
     @newss = scope.all(:include => [:author, :project],
                                        :order => "#{News.table_name}.created_on DESC",
                                        :offset => @offset,

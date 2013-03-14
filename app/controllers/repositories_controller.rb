@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -138,12 +138,12 @@ class RepositoriesController < ApplicationController
 
   def revisions
     @changeset_count = @repository.changesets.count
-    @changeset_pages = Paginator.new self, @changeset_count,
+    @changeset_pages = Paginator.new @changeset_count,
                                      per_page_option,
                                      params['page']
     @changesets = @repository.changesets.
-      limit(@changeset_pages.items_per_page).
-      offset(@changeset_pages.current.offset).
+      limit(@changeset_pages.per_page).
+      offset(@changeset_pages.offset).
       includes(:user, :repository, :parents).
       all
 

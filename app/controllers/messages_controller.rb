@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -40,12 +40,12 @@ class MessagesController < ApplicationController
     end
 
     @reply_count = @topic.children.count
-    @reply_pages = Paginator.new self, @reply_count, REPLIES_PER_PAGE, page
+    @reply_pages = Paginator.new @reply_count, REPLIES_PER_PAGE, page
     @replies =  @topic.children.
       includes(:author, :attachments, {:board => :project}).
       reorder("#{Message.table_name}.created_on ASC").
-      limit(@reply_pages.items_per_page).
-      offset(@reply_pages.current.offset).
+      limit(@reply_pages.per_page).
+      offset(@reply_pages.offset).
       all
 
     @reply = Message.new(:subject => "RE: #{@message.subject}")
@@ -125,7 +125,7 @@ class MessagesController < ApplicationController
 
 private
   def find_message
-    find_board
+    return unless find_board
     @message = @board.messages.find(params[:id], :include => :parent)
     @topic = @message.root
   rescue ActiveRecord::RecordNotFound
@@ -137,5 +137,6 @@ private
     @project = @board.project
   rescue ActiveRecord::RecordNotFound
     render_404
+    nil
   end
 end

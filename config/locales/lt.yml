@@ -468,7 +468,6 @@ lt:
   permission_edit_own_time_entries: Redguoti savo laiko įrašus
   permission_manage_news: Valdyti naujienas
   permission_comment_news: Komentuoti naujienas
-  permission_manage_documents: Valdyti dokumentus
   permission_view_documents: Matyti dokumentus
   permission_manage_files: Valdyti failus
   permission_view_files: Matyti failus
@@ -1009,8 +1008,6 @@ lt:
   text_mercurial_repository_note: Vietinė saugykla (e.g. /hgrepo, c:\hgrepo)
   text_scm_command: Komanda
   text_scm_command_version: Versija
-  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
-  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
 
   default_role_manager: Vadovas
   default_role_developer: Projektuotojas
@@ -1135,3 +1132,18 @@ lt:
   label_in_the_next_days: per ateinančias
   label_in_the_past_days: per paskutines
   label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  field_generate_password: Generate password
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Iš viso
+  text_scm_config: You can configure your SCM commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: SCM command is not available. Please check settings on the administration panel.

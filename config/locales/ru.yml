@@ -147,7 +147,7 @@ ru:
         many:  "больше %{count} лет"
         other: "больше %{count} лет"
       almost_x_years:
-        one:   "почти 1 год"
+        one:   "почти %{count} год"
         few:   "почти %{count} года"
         many:  "почти %{count} лет"
         other: "почти %{count} года"
@@ -813,7 +813,6 @@ ru:
   permission_manage_project_activities: Управление типами действий для проекта
   permission_manage_boards: Управление форумами
   permission_manage_categories: Управление категориями задач
-  permission_manage_documents: Управление документами
   permission_manage_files: Управление файлами
   permission_manage_issue_relations: Управление связыванием задач
   permission_manage_members: Управление участниками
@@ -1111,11 +1110,10 @@ ru:
   error_attachment_too_big: Этот файл нельзя загрузить из-за превышения максимального размера файла (%{max_size})
   notice_failed_to_save_time_entries: "Невозможно сохранить %{count} затраченное время для %{total} выбранных: %{ids}."
   label_x_issues:
-    zero:  0 Задач
-    one:   1 Задача
-    few:   "%{count} Задач"
-    many:  "%{count} Задач"
-    other: "%{count} Задач"
+    one:   "%{count} задача"
+    few:   "%{count} задачи"
+    many:  "%{count} задач"
+    other: "%{count} Задачи"
   label_repository_new: Новое хранилище
   field_repository_is_default: Хранилище по умолчанию
   label_copy_attachments: Копировать вложения
@@ -1136,7 +1134,7 @@ ru:
   button_delete_my_account: "Удалить мою учетную запись" 
   text_account_destroy_confirmation: "Ваша учетная запись будет полностью удалена без возможности восстановления.\nВы уверены, что хотите продолжить?" 
   error_session_expired: Срок вашей сессии истек. Пожалуйста войдите еще раз
-  text_session_expiration_settings: "Warning: changing these settings may expire the current sessions including yours."
+  text_session_expiration_settings: "Внимание! Изменение этих настроек может привести к завершению текущих сессий, включая вашу."
   setting_session_lifetime: Максимальная продолжительность сессии
   setting_session_timeout: Таймут сессии 
   label_session_expiration: Срок истечения сессии
@@ -1173,14 +1171,30 @@ ru:
   permission_set_notes_private: Размещение приватных комментариев
   label_no_issues_in_project: нет задач в проекте
   label_any: все
-  label_last_n_weeks: последние %{count} недель
+  label_last_n_weeks:
+    one:   "последняя %{count} неделя"
+    few:   "последние %{count} недели"
+    many:  "последние %{count} недель"
+    other: "последние %{count} недели"
   setting_cross_project_subtasks: Разрешить подзадачи в между проектами
   label_cross_project_descendants: С подпроектами
   label_cross_project_tree: С деревом проектов
   label_cross_project_hierarchy: С иерархией проектов
   label_cross_project_system: Со всеми проектами
   button_hide: Скрыть
-  setting_non_working_week_days: Не рабочие дни
+  setting_non_working_week_days: Нерабочие дни
   label_in_the_next_days: в средующие дни
   label_in_the_past_days: в прошлые дни
   label_attribute_of_user: Пользователь %{name}
+  text_turning_multiple_off: Если отключить множественные значения, лишние значения из списка будут удалены, чтобы осталось только по одному значению.
+  label_attribute_of_issue: Задача %{name}
+  permission_add_documents: Добавить документы
+  permission_edit_documents: Редактировать документы
+  permission_delete_documents: Удалить документы
+  label_gantt_progress_line: Линия прогресса
+  setting_jsonp_enabled: Поддержка JSONP
+  field_inherit_members: Наследовать участников
+  field_closed_on: Закрыта
+  field_generate_password: Создание пароля
+  setting_default_projects_tracker_ids: Трекеры по умолчанию для новых проектов
+  label_total_time: Общее время
